@@ -15,12 +15,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 @Entity
 @Table(name = "application")
 public class Application {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "app_id")
 	private int id;
 
@@ -50,7 +53,8 @@ public class Application {
 	@Column(name = "mgr_sig")
 	private Boolean mgr_sig = null;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+	@ManyToOne(cascade = CascadeType.ALL)
+	@NotFound(action = NotFoundAction.IGNORE)
 	@JoinColumn(name = "emp_id_fk")
 	private Employee employee;
 
@@ -156,7 +160,7 @@ public class Application {
 	public String toString() {
 		return "Application [id=" + id + ", type=" + type + ", days=" + days + ", start_date=" + start_date
 				+ ", last_date=" + last_date + ", req_papers=" + req_papers + ", super_sig=" + super_sig + ", pd_sig="
-				+ pd_sig + ", mgr_sig=" + mgr_sig + ", employee=" + employee + "]";
+				+ pd_sig + ", mgr_sig=" + mgr_sig + ", employee=" + employee.getId() + "]";
 	}
 
 }

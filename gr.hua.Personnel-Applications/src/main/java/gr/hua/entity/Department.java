@@ -10,12 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "department")
-public class Department {
+public class Department{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "dep_id")
 	private int id;
 
@@ -23,8 +25,9 @@ public class Department {
 	private String name;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "super_id_fk")
-	private Employee employee;
+	@JoinColumn(name = "super_id_fk",nullable = true)
+	@JsonIgnore
+	private Employee supervisor;
 
 	public Department() {
 
@@ -50,18 +53,18 @@ public class Department {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public Employee getEmployee() {
-		return employee;
+	
+	public int getSupervisor() {
+		return supervisor.getId();
 	}
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public void setSupervisor(Employee supervisor) {
+		this.supervisor = supervisor;
 	}
 
 	@Override
 	public String toString() {
-		return "Department [id=" + id + ", name=" + name + ", employee=" + employee + "]";
+		return "Department [id=" + id + ", name=" + name + ", employee=" + supervisor.getId() + "]";
 	}
 
 }

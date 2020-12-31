@@ -10,20 +10,20 @@ import javax.persistence.Table;
 public class User {
 
 	@Id
-	@Column(name = "username", nullable = false)
+	@Column(name = "username")
 	private String username;
 
-	@Column(name = "password", nullable = false)
+	@Column(name = "password")
 	private String password;
 
-	@Column(name = "enabled", nullable = false)
-	private boolean enabled;
+	@Column(name = "enabled")
+	private Boolean enabled;
 
 	public User() {
 
 	}
 
-	public User(String username, String password, boolean enabled) {
+	public User(String username, String password, Boolean enabled) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -46,11 +46,11 @@ public class User {
 		this.password = password;
 	}
 
-	public boolean getEnabled() {
+	public Boolean getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
 

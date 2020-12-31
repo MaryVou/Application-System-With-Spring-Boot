@@ -16,22 +16,24 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import gr.hua.entity.Employee;
-import gr.hua.repository.EmployeeRepository;
+import gr.hua.service.EmployeeService;
 
 @RestController
 public class EmployeeController {
 
 	@Autowired
-	private EmployeeRepository EmployeeRepository;
+	private EmployeeService employeeService;
 
-	@GetMapping("/employees")
+	@GetMapping("/employees/view")
+	//@Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_SUPERVISOR"})
 	public List<Employee> retrieveAllEmployees() {
-		return EmployeeRepository.findAll();
+		return employeeService.retrieveEmployees();
 	}
 
-	@GetMapping("/employees/{id}")
+	@GetMapping("/employees/view/{id}")
+	//@Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_SUPERVISOR"})
 	public Employee retrieveEmployee(@PathVariable int id) {
-		Optional<Employee> Employee = EmployeeRepository.findById(id);
+		Optional<Employee> Employee = employeeService.retrieveEmployeeById(id);
 
 		if (!Employee.isPresent())
 			throw new EmployeeNotFoundException("id-" + id);
@@ -39,34 +41,36 @@ public class EmployeeController {
 		return Employee.get();
 	}
 
-	@DeleteMapping("/employees/{id}")
+	@DeleteMapping("/employees/delete/{id}")
+	//@Secured("ROLE_ADMIN")
 	public void deleteEmployee(@PathVariable int id) {
-		EmployeeRepository.deleteById(id);
+		employeeService.deleteEmployee(id);
 	}
 
-	@PostMapping("/employees")
+	@PostMapping("/employees/new")
+	//@Secured("ROLE_ADMIN")
 	public ResponseEntity<Object> createEmployee(@RequestBody Employee Employee) {
-		Employee savedEmployee = EmployeeRepository.save(Employee);
+		Employee savedEmployee = employeeService.createOrUpdateEmployee(Employee);
 		System.out.println("Employee id " + savedEmployee.getId());
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(savedEmployee.getId()).toUri();
 
 		return ResponseEntity.created(location).build();
-
 	}
 
-	@PutMapping("/employees/{id}")
+	@PutMapping("/employees/update/{id}")
+	//@Secured("ROLE_ADMIN")
 	public ResponseEntity<Object> updateEmployee(@RequestBody Employee Employee, @PathVariable int id) {
 
-		Optional<Employee> EmployeeOptional = EmployeeRepository.findById(id);
+		Optional<Employee> EmployeeOptional = employeeService.retrieveEmployeeById(id);
 
 		if (!EmployeeOptional.isPresent())
 			return ResponseEntity.notFound().build();
 
 		Employee.setId(id);
 
-		EmployeeRepository.save(Employee);
+		employeeService.createOrUpdateEmployee(Employee);
 
 		return ResponseEntity.noContent().build();
 	}

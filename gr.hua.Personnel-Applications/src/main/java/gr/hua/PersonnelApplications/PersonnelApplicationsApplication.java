@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement
 @EntityScan("gr.hua.entity")
-@ComponentScan(basePackages={"gr.hua.controller"})
+@ComponentScan(basePackages={"gr.hua.controller","gr.hua.service"})
 @EnableJpaRepositories("gr.hua.repository")
 public class PersonnelApplicationsApplication {
 

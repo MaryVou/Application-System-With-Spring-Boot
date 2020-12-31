@@ -15,19 +15,24 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "employee")
 public class Employee {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "emp_id")
 	private int id;
 
-	@Column(name = "f_name", nullable = false)
+	@Column(name = "f_name")
 	private String fname;
 
-	@Column(name = "l_name", nullable = false)
+	@Column(name = "l_name")
 	private String lname;
 
 	@Column(name = "email")
@@ -48,10 +53,12 @@ public class Employee {
 	private Date hire_date;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+	@JsonIgnore
 	@JoinColumn(name = "dep_id_fk")
 	private Department department;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
 	@JoinColumn(name = "username_fk")
 	private User user;
 
@@ -171,7 +178,7 @@ public class Employee {
 	public String toString() {
 		return "Employee [id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", phone=" + phone
 				+ ", address=" + address + ", birth_date=" + birth_date + ", hire_date=" + hire_date + ", department="
-				+ department + ", user=" + user + "]";
+				+ department.getName() + ", user=" + user.getUsername() + "]";
 	}
 
 }
