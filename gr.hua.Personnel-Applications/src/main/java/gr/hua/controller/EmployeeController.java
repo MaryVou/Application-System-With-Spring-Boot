@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import gr.hua.entity.Employee;
+import gr.hua.entity.EmployeeRequest;
 import gr.hua.service.EmployeeService;
 
 @RestController
@@ -49,8 +50,8 @@ public class EmployeeController {
 
 	@PostMapping("/employees/new")
 	//@Secured("ROLE_ADMIN")
-	public ResponseEntity<Object> createEmployee(@RequestBody Employee Employee) {
-		Employee savedEmployee = employeeService.createOrUpdateEmployee(Employee);
+	public ResponseEntity<Object> createEmployee(@RequestBody EmployeeRequest employeeRequest) {
+		Employee savedEmployee = employeeService.createEmployee(employeeRequest);
 		System.out.println("Employee id " + savedEmployee.getId());
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -70,7 +71,7 @@ public class EmployeeController {
 
 		Employee.setId(id);
 
-		employeeService.createOrUpdateEmployee(Employee);
+		//employeeService.createOrUpdateEmployee(Employee);
 
 		return ResponseEntity.noContent().build();
 	}

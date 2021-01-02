@@ -15,9 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -25,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Employee {
 
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "emp_id")
 	private int id;
 
@@ -78,20 +75,6 @@ public class Employee {
 		this.address = address;
 		this.birth_date = birth_date;
 		this.hire_date = hire_date;
-	}
-
-	public Employee(String fname, String lname, String email, String phone, String address, Date birth_date,
-			Date hire_date, Department department, User user) {
-		super();
-		this.fname = fname;
-		this.lname = lname;
-		this.email = email;
-		this.phone = phone;
-		this.address = address;
-		this.birth_date = birth_date;
-		this.hire_date = hire_date;
-		this.department = department;
-		this.user = user;
 	}
 
 	public int getId() {
