@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+@ComponentScan("WebSecurityConfig")
 @EnableTransactionManagement
 @EntityScan("gr.hua.entity")
 @ComponentScan(basePackages={"gr.hua.controller","gr.hua.service"})

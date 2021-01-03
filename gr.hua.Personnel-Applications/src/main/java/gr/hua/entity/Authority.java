@@ -1,10 +1,13 @@
 package gr.hua.entity;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,7 +21,7 @@ public class Authority {
 
 	@Column(name = "authority", nullable = false)
 	private String authority;
-
+	
 	@Id
 	@Column(name = "ix_auth_username")
 	private String ix_auth_username;

@@ -6,29 +6,34 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import gr.hua.entity.Employee;
 import gr.hua.entity.EmployeeRequest;
 import gr.hua.service.EmployeeService;
 
-@RestController
+@Controller
 public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
 
 	@GetMapping("/employees")
-	//@Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_SUPERVISOR"})
-	public List<Employee> retrieveAllEmployees() {
-		return employeeService.retrieveEmployees();
+	@Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_SUPERVISOR"})
+	public String retrieveAllEmployees(Model model) {
+		List<Employee> employees = employeeService.retrieveEmployees();
+		model.addAttribute("employees", employees);
+		System.out.println("Yay this is working :)");
+		return "viewEmployees";
 	}
 
 	@GetMapping("/employees/{id}")
@@ -42,10 +47,11 @@ public class EmployeeController {
 		return Employee.get();
 	}
 
-	@DeleteMapping("/employees/{id}")
+	@GetMapping("/employees/delete/{id}")
 	//@Secured("ROLE_ADMIN")
-	public void deleteEmployee(@PathVariable int id) {
+	public String deleteEmployee(@PathVariable("id") int id, Model model) {
 		employeeService.deleteEmployee(id);
+		return "redirect:/employees";
 	}
 
 	@PostMapping("/employees/new")
