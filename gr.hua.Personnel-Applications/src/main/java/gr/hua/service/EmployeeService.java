@@ -35,11 +35,9 @@ public class EmployeeService {
 	public Employee createEmployee(EmployeeRequest employeeRequest) {
 		Employee emp = employeeRepository.save(employeeRequest.getEmployee());
 		int emp_id = emp.getId();
-		System.out.println(emp_id);
 		
 		String dep_name = employeeRequest.getDepartment().getName();
 		int dep_id = departmentRepository.findIdByName(dep_name);
-		System.out.println(dep_id);
 		employeeRepository.linkWithDepartment(dep_id, emp_id);
 		
 		String username = employeeRequest.getUser().getUsername();
@@ -48,6 +46,24 @@ public class EmployeeService {
 		employeeRepository.linkWithUser(username,password,emp_id);
 		employeeRepository.updateUsername(username, emp_id);
 		
+		employeeRepository.linkWithAuthorities(username);
+		
 		return emp;
 	}
+	
+	public Boolean employeeExists(int id) {
+		return employeeRepository.existsById(id);
+	}
+	
+	public void promoteToSupervisor(int emp_id, int dep_id) {
+		String username = employeeRepository.findUsernameById(emp_id);
+		employeeRepository.promoteToSupervisor(username);
+		employeeRepository.updateWorkingDepartment(emp_id,dep_id);
+	}
+	
+	public void supervisorDegradation(int id) {
+		String username = employeeRepository.findUsernameById(id);
+		employeeRepository.supervisorDegradation(username);
+	}
+	
 }

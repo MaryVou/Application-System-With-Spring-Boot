@@ -25,13 +25,13 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 
-	@GetMapping("/employees/view")
+	@GetMapping("/employees")
 	//@Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_SUPERVISOR"})
 	public List<Employee> retrieveAllEmployees() {
 		return employeeService.retrieveEmployees();
 	}
 
-	@GetMapping("/employees/view/{id}")
+	@GetMapping("/employees/{id}")
 	//@Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_SUPERVISOR"})
 	public Employee retrieveEmployee(@PathVariable int id) {
 		Optional<Employee> Employee = employeeService.retrieveEmployeeById(id);
@@ -42,7 +42,7 @@ public class EmployeeController {
 		return Employee.get();
 	}
 
-	@DeleteMapping("/employees/delete/{id}")
+	@DeleteMapping("/employees/{id}")
 	//@Secured("ROLE_ADMIN")
 	public void deleteEmployee(@PathVariable int id) {
 		employeeService.deleteEmployee(id);
@@ -58,22 +58,6 @@ public class EmployeeController {
 				.buildAndExpand(savedEmployee.getId()).toUri();
 
 		return ResponseEntity.created(location).build();
-	}
-
-	@PutMapping("/employees/update/{id}")
-	//@Secured("ROLE_ADMIN")
-	public ResponseEntity<Object> updateEmployee(@RequestBody Employee Employee, @PathVariable int id) {
-
-		Optional<Employee> EmployeeOptional = employeeService.retrieveEmployeeById(id);
-
-		if (!EmployeeOptional.isPresent())
-			return ResponseEntity.notFound().build();
-
-		Employee.setId(id);
-
-		//employeeService.createOrUpdateEmployee(Employee);
-
-		return ResponseEntity.noContent().build();
 	}
 
 }
