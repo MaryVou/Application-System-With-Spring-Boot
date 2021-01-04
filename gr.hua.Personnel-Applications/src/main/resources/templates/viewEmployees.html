@@ -26,9 +26,11 @@
 				</tbody>
 			</table>
 		</div>
-		<p>
-			<a href="/employees/new">Add a new user</a>
-		</p>
+		<div sec:authorize="hasRole('ROLE_ADMIN')">
+			<p>
+				<a href="/employees/new">Add a new user</a>
+			</p>
+		</div>
 	</div>
 </body>
 </html>

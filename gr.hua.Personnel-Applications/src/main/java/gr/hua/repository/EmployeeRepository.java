@@ -2,8 +2,6 @@ package gr.hua.repository;
 
 import gr.hua.entity.Employee;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,12 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Transactional
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-	
-	/*
-	@Query(value="select new gr.hua.entity.EmployeeResponse(e.id, e.fname, e.lname, e.email, e.phone, e.address, e.birth_date, e.hire_date"
-			+ ",e.department.name, e.user.username) from Employee e")
-	public List<Employee> findAllEmployees();
-	*/
 	
 	@Modifying
 	@Query(value="delete from Employee where emp_id = ?1", nativeQuery=true)

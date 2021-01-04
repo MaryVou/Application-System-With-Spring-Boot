@@ -42,16 +42,16 @@ public class Application {
 	private Date last_date;
 
 	@Column(name = "req_papers")
-	private Blob req_papers = null;
+	private Blob req_papers;
 
 	@Column(name = "super_sig")
-	private Boolean super_sig = null;
+	private Boolean super_sig;
 
 	@Column(name = "pd_sig")
-	private Boolean pd_sig = null;
+	private Boolean pd_sig;
 
 	@Column(name = "mgr_sig")
-	private Boolean mgr_sig = null;
+	private Boolean mgr_sig;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@NotFound(action = NotFoundAction.IGNORE)

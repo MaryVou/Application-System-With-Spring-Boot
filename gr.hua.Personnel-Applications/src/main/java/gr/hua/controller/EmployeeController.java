@@ -7,6 +7,7 @@ import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,43 +28,41 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 
-	@GetMapping("/employees")
-	@Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_SUPERVISOR"})
-	public String retrieveAllEmployees(Model model) {
+	@GetMapping("/employees") // ADMIN , MANAGER, SUPERVISOR
+	public String retrieveAllUsers(Model model) {
 		List<Employee> employees = employeeService.retrieveEmployees();
 		model.addAttribute("employees", employees);
-		System.out.println("Yay this is working :)");
 		return "viewEmployees";
 	}
 
-	@GetMapping("/employees/{id}")
-	//@Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_SUPERVISOR"})
-	public Employee retrieveEmployee(@PathVariable int id) {
-		Optional<Employee> Employee = employeeService.retrieveEmployeeById(id);
-
-		if (!Employee.isPresent())
-			throw new EmployeeNotFoundException("id-" + id);
-
-		return Employee.get();
-	}
+	/*
+	 * @GetMapping("/employees/{id}")
+	 * 
+	 * @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_SUPERVISOR"}) public Employee
+	 * retrieveEmployee(@PathVariable int id) { Optional<Employee> Employee =
+	 * employeeService.retrieveEmployeeById(id);
+	 * 
+	 * if (!Employee.isPresent()) throw new EmployeeNotFoundException("id-" + id);
+	 * 
+	 * return Employee.get(); }
+	 */
 
 	@GetMapping("/employees/delete/{id}")
-	//@Secured("ROLE_ADMIN")
 	public String deleteEmployee(@PathVariable("id") int id, Model model) {
 		employeeService.deleteEmployee(id);
 		return "redirect:/employees";
 	}
 
+	@GetMapping("/employees/new")
+	public String showEmployeeForm() {
+		return "EmployeeForm";
+	}
+
 	@PostMapping("/employees/new")
-	//@Secured("ROLE_ADMIN")
-	public ResponseEntity<Object> createEmployee(@RequestBody EmployeeRequest employeeRequest) {
+	public String createEmployee(@RequestBody EmployeeRequest employeeRequest) {
 		Employee savedEmployee = employeeService.createEmployee(employeeRequest);
 		System.out.println("Employee id " + savedEmployee.getId());
-
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(savedEmployee.getId()).toUri();
-
-		return ResponseEntity.created(location).build();
+		return "redirect:/employees";
 	}
 
 }
