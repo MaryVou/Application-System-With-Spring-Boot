@@ -55,7 +55,7 @@ public class EmployeeController {
 
 	@GetMapping("/employees/new")
 	public String showEmployeeForm() {
-		return "EmployeeForm";
+		return "NewEmployee";
 	}
 
 	@PostMapping("/employees/new")

@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Employees</title>
 </head>
-<body>
-	<div th:switch="${employees}">
-		<h2 th:case="null">No employees yet!</h2>
-		<div th:case="*">
-			<h2>Employees</h2>
-			<table>
-				<thead>
-					<tr>
-						<th>First Name</th>
-						<th>Last Email</th>
-						<th>Delete</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="employee : ${employees}">
-						<td th:text="${employee.fname}"></td>
-						<td th:text="${employee.lname}"></td>
-						<td><a th:href="@{/employees/delete/{id}(id=${employee.id})}">Delete</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div sec:authorize="hasRole('ROLE_ADMIN')">
-			<p>
-				<a href="/employees/new">Add a new user</a>
-			</p>
-		</div>
+<body style="background-image: url('https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg?size=626&ext=jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
+	<div align =  "center">
+		<h1 style="font-family: Arial, Helvetica, sans-serif; color: grey;"> EMPLOYEES </h1>
+		<form action = "ViewEmployees" method = "post">
+			<div th:switch="${employees}">
+				<h2 th:case="null">
+					<table>
+						<tr> <td> </td> </tr>	
+						<tr> <td> </td> </tr>
+						<tr> <td> </td> </tr>
+						<tr> <td> </td> </tr>
+						<tr style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> NO EMPLOYEES YET </tr>
+					</table>
+				
+				</h2>
+			<div th:case="*">
+				<table>
+					<thead>
+						<tr style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;">
+							<th>FIRST NAME</th>
+							<th>LAST NAME</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">DELETE</th>
+						</tr>
+					</thead>
+					<tbody style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;">
+						<tr th:each="employee : ${employees}">
+							<td th:text="${employee.fname}"></td>
+							<td th:text="${employee.lname}"></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/employees/delete/{id}(id=${employee.id})}">Delete</a></td>
+						</tr>
+					</tbody>
+				</table>
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
+				<p> <a href="/employees/new">Add a new user</a> </p>
+			</div>
+		</form>
 	</div>
 </body>
 </html>
