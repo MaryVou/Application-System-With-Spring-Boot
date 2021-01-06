@@ -20,24 +20,37 @@
 				
 				</h2>
 			<div th:case="*">
-				<table>
+				<table style="padding:10px;">
 					<thead>
-						<tr style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;">
+						<tr style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
 							<th>FIRST NAME</th>
 							<th>LAST NAME</th>
+							<th>BIRTHDATE</th>
+							<th>ADDRESS</th>
+							<th>EMAIL</th>
+							<th>PHONE NUMBER</th>
+							<th>HIRE DATE</th>
+							<th>EMPLOYEE ID</th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')">DELETE</th>
 						</tr>
 					</thead>
-					<tbody style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;">
+					<tbody style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
 						<tr th:each="employee : ${employees}">
 							<td th:text="${employee.fname}"></td>
 							<td th:text="${employee.lname}"></td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/employees/delete/{id}(id=${employee.id})}">Delete</a></td>
+							<td th:text="${employee.birth_date}"></td>
+							<td th:text="${employee.address}"></td>
+							<td th:text="${employee.email}"></td>
+							<td th:text="${employee.phone}"></td>
+							<td th:text="${employee.hire_date}"></td>
+							<td th:text="${employee.id}"></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/employees/delete/{id}(id=${employee.id})}" > delete</a></td>
+							
 						</tr>
 					</tbody>
 				</table>
 			<div sec:authorize="hasRole('ROLE_ADMIN')">
-				<p> <a href="/employees/new">Add a new user</a> </p>
+				<p style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;"> <a href="/employees/new">Add a new user</a> </p>
 			</div>
 		</form>
 	</div>

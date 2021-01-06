@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import gr.hua.controller.EmployeeNotFoundException;
 import gr.hua.entity.Department;
+import gr.hua.entity.DepartmentResponse;
 import gr.hua.repository.DepartmentRepository;
 
 @Service
@@ -18,8 +19,8 @@ public class DepartmentService {
 	@Autowired
 	private DepartmentRepository departmentRepository;
 	
-	public List<Department> retrieveDepartments(){
-		return departmentRepository.findAll();
+	public List<DepartmentResponse> retrieveDepartments(){
+		return departmentRepository.findAllDepartments();
 	}
 	
 	public void createNewDepartment(String name, int superId) {

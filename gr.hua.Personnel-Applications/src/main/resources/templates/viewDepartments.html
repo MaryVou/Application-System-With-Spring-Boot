@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Departments</title>
+</head>
+<body style="background-image: url('https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg?size=626&ext=jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
+	<div align =  "center">
+		<h1 style="font-family: Arial, Helvetica, sans-serif; color: grey;"> DEPARTMENTS </h1>
+		<form action = "ViewDepartments" method = "post">
+			<div th:switch="${departments}">
+				<h2 th:case="null">
+					<table>
+						<tr> <td> </td> </tr>	
+						<tr> <td> </td> </tr>
+						<tr> <td> </td> </tr>
+						<tr> <td> </td> </tr>
+						<tr style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> NO DEPARTMENTS YET </tr>
+					</table>
+				
+				</h2>
+			<div th:case="*">
+				<table>
+					<thead>
+						<tr style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
+							<th>ID</th>
+							<th>NAME</th>
+							<th>SUPERVISOR ID</th>
+							<th>SUPERVISOR FIRST NAME</th>
+							<th>SUPERVISOR LAST NAME</th>
+							<th>SUPERVISOR EMAIL</th>
+							<!--<th sec:authorize="hasRole('ROLE_ADMIN')">DELETE</th>-->
+						</tr>
+					</thead>
+					<tbody style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
+						<tr th:each="department : ${departments}">
+							<td th:text="${department.id}"></td>
+							<td th:text="${department.name}"></td>
+							<td th:text="${department.super_id}"></td>
+							<td th:text="${department.super_fname}"></td>
+							<td th:text="${department.super_lname}"></td>
+							<td th:text="${department.super_email}"></td>
+							<!--<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/departments/delete/{id}(id=${department.dep_id})}" > <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vectorstock.com%2Froyalty-free-vector%2Ftrash-bin-icon-rounded-squares-button-vector-4527537&psig=AOvVaw2lsi5WHjD1i5INq6Ri6lnv&ust=1610048936540000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLCMueyJiO4CFQAAAAAdAAAAABAJ" width=150" height="70"></a></td>-->
+						</tr>
+					</tbody>
+				</table>
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
+				<p style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;"> <a href="/departments/new">Add a new department</a> </p>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
