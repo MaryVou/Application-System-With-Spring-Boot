@@ -31,16 +31,16 @@ public class DepartmentController {
 		return "viewDepartments";
 	}
 	
-	//CREATE NEW DEPARTMENT AND RPOMOTE AN EMPLOYEE TO SUPERVISOR OR USE AN EXISTING ONE AND PROMOTE ANOTHER EMPLOYEE TO TAKE THEIR PLACE
 	/*
+	//CREATE NEW DEPARTMENT AND RPOMOTE AN EMPLOYEE TO SUPERVISOR OR USE AN EXISTING ONE AND PROMOTE ANOTHER EMPLOYEE TO TAKE THEIR PLACE
 	@PostMapping("/departments/new")
 	public void createDepartment(@RequestParam(name = "name") String name,@RequestParam(name = "supervisor") int superId) {
 		departmentService.createNewDepartment(name, superId);
-	}
+	}*/
 	
-	@DeleteMapping("/departments/delete")
-	public void deleteDepartment(@RequestParam(name = "old") String old_dep_name,@RequestParam(name = "new") String new_dep_name) {
+	@GetMapping("/departments/delete/{id}")
+	public String deleteDepartment(@RequestParam(name = "old") String old_dep_name,@RequestParam(name = "new") String new_dep_name) {
 		departmentService.deleteDepartment(old_dep_name, new_dep_name);
+		return "redirect:/departments";
 	}
-	*/
 }

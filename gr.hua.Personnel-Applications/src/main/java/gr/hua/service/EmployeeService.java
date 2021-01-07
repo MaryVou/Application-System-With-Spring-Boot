@@ -33,22 +33,24 @@ public class EmployeeService {
 	}
 	
 	public Employee createEmployee(EmployeeRequest employeeRequest) {
-		Employee emp = employeeRepository.save(employeeRequest.getEmployee());
-		int emp_id = emp.getId();
+		Employee emp = new Employee(employeeRequest.getFname(),employeeRequest.getLname(), employeeRequest.getEmail(), employeeRequest.getPhone(), 
+				employeeRequest.getAddress(), employeeRequest.getBirth_date(), employeeRequest.getHire_date());
+		Employee saved_emp = employeeRepository.save(emp);
+		int emp_id = saved_emp.getId();
 		
-		String dep_name = employeeRequest.getDepartment().getName();
+		String dep_name = employeeRequest.getDep_name();
 		int dep_id = departmentRepository.findIdByName(dep_name);
 		employeeRepository.linkWithDepartment(dep_id, emp_id);
 		
-		String username = employeeRequest.getUser().getUsername();
-		String password = employeeRequest.getUser().getPassword();
+		String username = employeeRequest.getUsername();
+		String password = employeeRequest.getPassword();
 
 		employeeRepository.linkWithUser(username,password,emp_id);
 		employeeRepository.updateUsername(username, emp_id);
 		
 		employeeRepository.linkWithAuthorities(username);
 		
-		return emp;
+		return saved_emp;
 	}
 	
 	public Boolean employeeExists(int id) {

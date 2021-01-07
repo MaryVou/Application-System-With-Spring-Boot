@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -54,12 +55,13 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/employees/new")
-	public String showEmployeeForm() {
+	public String showEmployeeForm(Model model) {
+		model.addAttribute("data", new EmployeeRequest());
 		return "NewEmployee";
 	}
 
 	@PostMapping("/employees/new")
-	public String createEmployee(@RequestBody EmployeeRequest employeeRequest) {
+	public String createEmployee(@ModelAttribute EmployeeRequest employeeRequest) {
 		Employee savedEmployee = employeeService.createEmployee(employeeRequest);
 		System.out.println("Employee id " + savedEmployee.getId());
 		return "redirect:/employees";
