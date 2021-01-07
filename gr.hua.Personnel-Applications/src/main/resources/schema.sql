@@ -1,11 +1,12 @@
-SET foreign_key_checks = 1;
+SET foreign_key_checks = 0;
 
 CREATE TABLE IF NOT EXISTS `user`(
 	`username` varchar(50) NOT NULL UNIQUE,
 	`password` varchar(100) NOT NULL,
 	`enabled` tinyint DEFAULT 1,
 	`emp_id` int,
-	PRIMARY KEY(`username`)
+	PRIMARY KEY(`username`),
+	CONSTRAINT `fk_user_employee` FOREIGN KEY(`emp_id`) REFERENCES `employee`(`emp_id`) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 CREATE TABLE IF NOT EXISTS `authorities`(
@@ -27,10 +28,9 @@ CREATE TABLE IF NOT EXISTS `employee`(
 	`dep_id_fk` int,
 	`username_fk` varchar(50),
 	PRIMARY KEY(`emp_id`),
-	CONSTRAINT `fk_employee_user` FOREIGN KEY(`username_fk`) REFERENCES `user`(`username`) ON DELETE SET NULL
+	CONSTRAINT `fk_employee_user` FOREIGN KEY(`username_fk`) REFERENCES `user`(`username`) ON DELETE SET NULL,
+	CONSTRAINT `fk_employee_department` FOREIGN KEY(`dep_id_fk`) REFERENCES `department`(`dep_id`) ON DELETE SET NULL
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-
-ALTER TABLE `user` ADD CONSTRAINT `fk_user_employee` FOREIGN KEY(`emp_id`) REFERENCES `employee`(`emp_id`) ON DELETE CASCADE;
 
 CREATE TABLE IF NOT EXISTS `department`(
 	`dep_id` int NOT NULL AUTO_INCREMENT,
@@ -39,8 +39,6 @@ CREATE TABLE IF NOT EXISTS `department`(
 	PRIMARY KEY(`dep_id`),
 	CONSTRAINT `fk_department_employee` FOREIGN KEY(`super_id_fk`) REFERENCES `employee`(`emp_id`) ON DELETE SET NULL
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-
-ALTER TABLE `employee` ADD CONSTRAINT `fk_employee_department` FOREIGN KEY(`dep_id_fk`) REFERENCES `department`(`dep_id`) ON DELETE SET NULL;
 
 CREATE TABLE IF NOT EXISTS `application`(
 	`app_id` int NOT NULL AUTO_INCREMENT,
@@ -56,3 +54,5 @@ CREATE TABLE IF NOT EXISTS `application`(
 	PRIMARY KEY(`app_id`),
 	CONSTRAINT `fk_application_employee` FOREIGN KEY(`emp_id_fk`) REFERENCES `employee`(`emp_id`) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
+
+SET foreign_key_checks = 1;
