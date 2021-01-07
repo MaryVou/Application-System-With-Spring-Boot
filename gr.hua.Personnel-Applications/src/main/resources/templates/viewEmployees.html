@@ -44,7 +44,7 @@
 							<td th:text="${employee.phone}"></td>
 							<td th:text="${employee.hire_date}"></td>
 							<td th:text="${employee.id}"></td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/employees/delete/{id}(id=${employee.id})}" > delete</a></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/employees/delete/{id}(id=${employee.id})}" ><img th:src="@{/resources/static/images/bin.png}" width="30" height="20"/></a></td>
 							
 						</tr>
 					</tbody>

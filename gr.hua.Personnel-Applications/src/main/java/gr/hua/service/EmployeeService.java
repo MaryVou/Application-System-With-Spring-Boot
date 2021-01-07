@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import gr.hua.entity.Employee;
@@ -19,6 +20,9 @@ public class EmployeeService {
 	
 	@Autowired 
 	private DepartmentRepository departmentRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	public List<Employee> retrieveEmployees(){
 		return employeeRepository.findAll();
@@ -44,6 +48,7 @@ public class EmployeeService {
 		
 		String username = employeeRequest.getUsername();
 		String password = employeeRequest.getPassword();
+		password = passwordEncoder.encode(password);
 
 		employeeRepository.linkWithUser(username,password,emp_id);
 		employeeRepository.updateUsername(username, emp_id);

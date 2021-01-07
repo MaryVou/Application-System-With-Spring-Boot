@@ -62,6 +62,7 @@ public class EmployeeController {
 
 	@PostMapping("/employees/new")
 	public String createEmployee(@ModelAttribute EmployeeRequest employeeRequest) {
+		System.out.println(employeeRequest.toString());
 		Employee savedEmployee = employeeService.createEmployee(employeeRequest);
 		System.out.println("Employee id " + savedEmployee.getId());
 		return "redirect:/employees";

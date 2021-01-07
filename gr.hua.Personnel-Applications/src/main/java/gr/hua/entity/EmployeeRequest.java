@@ -2,6 +2,9 @@ package gr.hua.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 public class EmployeeRequest {
 
 	private String fname;
@@ -9,7 +12,9 @@ public class EmployeeRequest {
 	private String email;
 	private String phone;
 	private String address;
+	@DateTimeFormat(iso=ISO.DATE)
 	private Date birth_date;
+	@DateTimeFormat(iso=ISO.DATE)
 	private Date hire_date;
 	private String username;
 	private String password;
