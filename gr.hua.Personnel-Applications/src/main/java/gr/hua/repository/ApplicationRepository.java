@@ -5,10 +5,14 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import gr.hua.entity.Application;
 import gr.hua.entity.ApplicationResponse;
 
+@Repository
+@Transactional
 public interface ApplicationRepository extends JpaRepository<Application,Integer>{
 	
 	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
@@ -30,6 +34,8 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 			+ ",a.mgr_sig, a.employee.id) from Application a, Employee e, User u, Authority auth "
 			+ "where a.employee.id=e.id and "
 			+ "a.pd_sig=null and "
+			+ "((a.type='recovery') or "
+			+ "(a.type='strike')) and "
 			+ "((a.super_sig=1) or "
 			+ "(a.mgr_sig=1)) and "
 			+ "e.user.username=u.username and "
@@ -49,22 +55,22 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 	public List<ApplicationResponse> findApplicationsForManager();
 	
 	@Modifying
-	@Query(value="Update application a set a.mgr_sig=1 where a.id=?1", nativeQuery=true)
+	@Query(value="Update application set mgr_sig=1 where app_id=?1", nativeQuery=true)
 	public void managerAcceptsApplication(int id);
 	
 	@Modifying
-	@Query(value="Update application a set a.super_sig=1 where a.id=?1", nativeQuery=true)
+	@Query(value="Update application set super_sig=1 where app_id=?1", nativeQuery=true)
 	public void supervisorAcceptsApplication(int id);
 	
 	@Modifying
-	@Query(value="Update application a set a.pd_sig=1 where a.id=?1", nativeQuery=true)
+	@Query(value="Update application set pd_sig=1 where app_id=?1", nativeQuery=true)
 	public void pdAcceptsApplication(int id);
 	
 	@Modifying
-	@Query(value="Update application a set a.mgr_sig=0 where a.id=?1", nativeQuery=true)
+	@Query(value="Update application set mgr_sig=0 where app_id=?1", nativeQuery=true)
 	public void managerRejectsApplication(int id);
 	
 	@Modifying
-	@Query(value="Update application a set a.super_sig=0 where a.id=?1", nativeQuery=true)
+	@Query(value="Update application set super_sig=0 where app_id=?1", nativeQuery=true)
 	public void supervisorRejectsApplication(int id);
 }

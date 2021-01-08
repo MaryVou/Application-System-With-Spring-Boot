@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import gr.hua.entity.Employee;
 import gr.hua.entity.EmployeeRequest;
+import gr.hua.service.DepartmentService;
 import gr.hua.service.EmployeeService;
 
 @Controller
@@ -28,6 +29,9 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private DepartmentService departmentService;
 
 	@GetMapping("/employees") // ADMIN , MANAGER, SUPERVISOR
 	public String retrieveAllUsers(Model model) {
@@ -56,7 +60,9 @@ public class EmployeeController {
 
 	@GetMapping("/employees/new")
 	public String showEmployeeForm(Model model) {
+		List<String> dep_names = departmentService.findDepartmentNames();
 		model.addAttribute("data", new EmployeeRequest());
+		model.addAttribute("departments", dep_names);
 		return "NewEmployee";
 	}
 

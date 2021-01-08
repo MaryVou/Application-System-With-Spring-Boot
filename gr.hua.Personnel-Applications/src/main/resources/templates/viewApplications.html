@@ -52,11 +52,14 @@
 							th:text="${app.pd_sig}"></td>
 						<td sec:authorize="hasRole('ROLE_MANAGER')"
 							th:text="${app.mgr_sig}"></td>
-						<div th:if="${#request.isUserInRole('MANAGER') or #request.isUserInRole('SUPERVISOR') or #request.isUserInRole('PDEMPLOYEE')}">
+						<div th:if="${#request.isUserInRole('MANAGER') or #request.isUserInRole('SUPERVISOR')}">
 						<td><a th:href="@{applications/accept/{id}(id=${app.id})}">Accept</a></td>
 						</div>
 						<div th:if="${#request.isUserInRole('MANAGER') or #request.isUserInRole('SUPERVISOR')}">
 						<td><a th:href="@{applications/reject/{id}(id=${app.id})}">Reject</a></td>
+						</div>
+						<div th:if="${#request.isUserInRole('PDEMPLOYEE')}">
+						<td><a th:href="@{applications/accept/{id}(id=${app.id})}">Check</a></td>
 						</div>
 					</tr>
 				</tbody>
