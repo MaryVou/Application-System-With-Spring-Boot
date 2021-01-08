@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Employees</title>
+
+<style> table, th, td { border: 1px solid black; padding: 5px; } </style>
 </head>
 <body style="background-image: url('https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg?size=626&ext=jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
 	<div align =  "center">
@@ -19,7 +21,7 @@
 				
 				</h2>
 			<div th:case="*">
-				<table style="padding:10px;">
+				<table width=100%">
 					<thead>
 						<tr style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
 							
@@ -45,7 +47,7 @@
 							<td th:text="${employee.email}"></td>
 							<td th:text="${employee.phone}"></td>
 							<td th:text="${employee.hire_date}"></td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/employees/delete/{id}(id=${employee.id})}" ><img th:src="@{/resources/static/images/bin.png}" width="30" height="20"/></a></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/employees/delete/{id}(id=${employee.id})}" >&#128465;</a></td>
 							
 						</tr>
 					</tbody>
