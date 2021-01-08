@@ -43,4 +43,7 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
 	
 	@Query(value="select d.dep_id from department d, employee e where e.username_fk=?1 and e.dep_id_fk=d.dep_id", nativeQuery=true)
 	public int findIdByUsername(String username);
+	
+	@Query(value="Select dep_name from department", nativeQuery=true)
+	public List<String> findDepartmentNames();
 }

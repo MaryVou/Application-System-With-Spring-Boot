@@ -31,7 +31,8 @@ public class ApplicationController {
 	}
 	
 	@GetMapping("/applications/accept/{id}")
-	public String acceptApplication(@PathVariable("id") int id, Model model) {
+	public String acceptApplication(@PathVariable("id") int id) {
+		System.out.println(id);
 		String connected_user = SecurityContextHolder.getContext().getAuthentication().getName();
 		applicationService.acceptApplication(id,connected_user);
 		return "redirect:/applications";

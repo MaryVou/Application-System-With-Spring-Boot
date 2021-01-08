@@ -28,12 +28,12 @@
 						<th sec:authorize="hasRole('ROLE_PDEMPLOYEE')">PAYROLL
 							DEPARTMENT SIGN</th>
 						<th sec:authorize="hasRole('ROLE_MANAGER')">MANAGER SIGN</th>
-						<security:authorize access="hasAnyRole('ROLE_MANAGER', 'ROLE_SUPERVISOR' , 'ROLE_PDEMPLOYEE')">
+						<div th:if="${#request.isUserInRole('MANAGER') or #request.isUserInRole('SUPERVISOR') or #request.isUserInRole('PDEMPLOYEE')}">
 						<th></th>
-						</security:authorize>
-						<security:authorize access="hasAnyRole('ROLE_MANAGER', 'ROLE_SUPERVISOR')">
+						</div>
+						<div th:if="${#request.isUserInRole('MANAGER') or #request.isUserInRole('SUPERVISOR')}">
 						<th></th>
-						</security:authorize>
+						</div>
 					</tr>
 				</thead>
 				<tbody 
@@ -52,12 +52,12 @@
 							th:text="${app.pd_sig}"></td>
 						<td sec:authorize="hasRole('ROLE_MANAGER')"
 							th:text="${app.mgr_sig}"></td>
-						<security:authorize access="hasAnyRole('ROLE_MANAGER', 'ROLE_SUPERVISOR' , 'ROLE_PDEMPLOYEE')">
-						<td><a th:href="@{applications/accept/{id}(id=${application.id})}">Accept</a></td>
-						</security:authorize>
-						<security:authorize access="hasAnyRole('ROLE_MANAGER', 'ROLE_SUPERVISOR')">
-						<td><a th:href="@{applications/reject/{id}(id=${application.id})}">Reject</a></td>
-						</security:authorize>
+						<div th:if="${#request.isUserInRole('MANAGER') or #request.isUserInRole('SUPERVISOR') or #request.isUserInRole('PDEMPLOYEE')}">
+						<td><a th:href="@{applications/accept/{id}(id=${app.id})}">Accept</a></td>
+						</div>
+						<div th:if="${#request.isUserInRole('MANAGER') or #request.isUserInRole('SUPERVISOR')}">
+						<td><a th:href="@{applications/reject/{id}(id=${app.id})}">Reject</a></td>
+						</div>
 					</tr>
 				</tbody>
 			</table>
