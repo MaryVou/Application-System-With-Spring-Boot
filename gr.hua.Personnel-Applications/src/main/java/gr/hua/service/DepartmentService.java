@@ -44,4 +44,8 @@ public class DepartmentService {
 
 	}
 	
+	public int findIdByUsername(String username) {
+		return departmentRepository.findIdByUsername(username);
+	}
+	
 }

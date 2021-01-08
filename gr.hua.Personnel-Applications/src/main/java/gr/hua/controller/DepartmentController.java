@@ -37,10 +37,10 @@ public class DepartmentController {
 	public void createDepartment(@RequestParam(name = "name") String name,@RequestParam(name = "supervisor") int superId) {
 		departmentService.createNewDepartment(name, superId);
 	}*/
-	
+	/*
 	@GetMapping("/departments/delete/{id}")
 	public String deleteDepartment(@RequestParam(name = "old") String old_dep_name,@RequestParam(name = "new") String new_dep_name) {
 		departmentService.deleteDepartment(old_dep_name, new_dep_name);
 		return "redirect:/departments";
-	}
+	}*/
 }

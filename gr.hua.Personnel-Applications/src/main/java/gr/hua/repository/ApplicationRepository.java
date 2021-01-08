@@ -3,6 +3,7 @@ package gr.hua.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import gr.hua.entity.Application;
@@ -19,10 +20,11 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 			+ "where a.employee.id=e.id and "
 			+ "a.super_sig=null and "
 			+ "e.user.username=u.username and "
+			+ "e.department.id = ?1 and "
 			+ "u.username=auth.user.username and "
 			+ "((auth.authority='ROLE_EMPLOYEE') or "
 			+ "(auth.authority='ROLE_PDEMPLOYEE'))")
-	public List<ApplicationResponse> findApplicationsForSupervisor();
+	public List<ApplicationResponse> findApplicationsForSupervisor(int dep_id);
 	
 	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
 			+ ",a.mgr_sig, a.employee.id) from Application a, Employee e, User u, Authority auth "
@@ -31,10 +33,11 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 			+ "((a.super_sig=1) or "
 			+ "(a.mgr_sig=1)) and "
 			+ "e.user.username=u.username and "
+			+ "e.id != ?1 and "
 			+ "u.username=auth.user.username and "
 			+ "((auth.authority='ROLE_EMPLOYEE') or "
 			+ "(auth.authority='ROLE_SUPERVISOR'))")
-	public List<ApplicationResponse> findApplicationsForPDEmployee();
+	public List<ApplicationResponse> findApplicationsForPDEmployee(int dep_id);
 	
 	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
 			+ ",a.mgr_sig, a.employee.id) from Application a, Employee e, User u, Authority auth "
@@ -44,4 +47,24 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 			+ "u.username=auth.user.username and "
 			+ "auth.authority='ROLE_SUPERVISOR'")
 	public List<ApplicationResponse> findApplicationsForManager();
+	
+	@Modifying
+	@Query(value="Update application a set a.mgr_sig=1 where a.id=?1", nativeQuery=true)
+	public void managerAcceptsApplication(int id);
+	
+	@Modifying
+	@Query(value="Update application a set a.super_sig=1 where a.id=?1", nativeQuery=true)
+	public void supervisorAcceptsApplication(int id);
+	
+	@Modifying
+	@Query(value="Update application a set a.pd_sig=1 where a.id=?1", nativeQuery=true)
+	public void pdAcceptsApplication(int id);
+	
+	@Modifying
+	@Query(value="Update application a set a.mgr_sig=0 where a.id=?1", nativeQuery=true)
+	public void managerRejectsApplication(int id);
+	
+	@Modifying
+	@Query(value="Update application a set a.super_sig=0 where a.id=?1", nativeQuery=true)
+	public void supervisorRejectsApplication(int id);
 }

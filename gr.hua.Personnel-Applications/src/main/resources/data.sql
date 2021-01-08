@@ -70,6 +70,7 @@ INSERT INTO application(type,days,start_date,last_date,emp_id_fk)
 	select t.*
 	from((SELECT 'recovery' as col1, 3 as col2, '2020-12-17' as col3, '2020-12-20' as col4, 12 as col5) union all
 		(SELECT 'strike',2,'2020-12-12','2020-12-14',5) union all
+		(SELECT 'recovery',10,'2020-12-05','2020-12-14',11) union all
 		(SELECT 'student',2,'2020-12-12','2020-12-14',7)
 		)t
 	WHERE NOT EXISTS(SELECT * FROM `application`);

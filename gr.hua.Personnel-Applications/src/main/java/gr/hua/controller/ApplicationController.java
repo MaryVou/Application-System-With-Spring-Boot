@@ -1,11 +1,15 @@
 package gr.hua.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import gr.hua.entity.Application;
@@ -20,16 +24,23 @@ public class ApplicationController {
 	
 	@GetMapping("/applications")
 	public String retrieveAllApplications(Model model){
-		List<ApplicationResponse> allApplications = applicationService.retrieveAllApplications();
-		List<ApplicationResponse> applicationsForSupervisor = applicationService.retrieveApplicationsForSupervisor();
-		List<ApplicationResponse> applicationsForPDEmployee = applicationService.retrieveApplicationsForPDEmployee();
-		List<ApplicationResponse> applicationsForManager = applicationService.retrieveApplicationsForManager();
-		model.addAttribute("allApplications", allApplications);
-		model.addAttribute("applicationsForSupervisor", applicationsForSupervisor);
-		model.addAttribute("applicationsForPDEmployee", applicationsForPDEmployee);
-		model.addAttribute("applicationsForManager", applicationsForManager);
+		String connected_user = SecurityContextHolder.getContext().getAuthentication().getName();
+		List<ApplicationResponse> applications = applicationService.retrieveApplications(connected_user);
+		model.addAttribute("allApplications", applications);
 		return "viewApplications";
 	}
 	
+	@GetMapping("/applications/accept/{id}")
+	public String acceptApplication(@PathVariable("id") int id, Model model) {
+		String connected_user = SecurityContextHolder.getContext().getAuthentication().getName();
+		applicationService.acceptApplication(id,connected_user);
+		return "redirect:/applications";
+	}
 	
+	@GetMapping("/applications/reject/{id}")
+	public String rejectApplication(@PathVariable("id") int id, Model model) {
+		String connected_user = SecurityContextHolder.getContext().getAuthentication().getName();
+		applicationService.rejectApplication(id,connected_user);
+		return "redirect:/applications";
+	}
 }

@@ -14,20 +14,55 @@ public class ApplicationService {
 
 	@Autowired
 	private ApplicationRepository applicationRepository;
+	
+	@Autowired
+	private DepartmentService departmentService;
 
-	public List<ApplicationResponse> retrieveAllApplications() {
-		return applicationRepository.findAllApplications();
+	@Autowired
+	private EmployeeService employeeService;
+	
+	@Autowired
+	private UserService userService;
+	
+	public List<ApplicationResponse> retrieveApplications(String username) {
+		List<ApplicationResponse> applications = null;
+		String authority = userService.findAuthorityByUsername(username);
+		
+		if(authority.equals("ROLE_ADMIN")) {
+			return applicationRepository.findAllApplications();
+		}else if(authority.equals("ROLE_MANAGER")) {
+			return applicationRepository.findApplicationsForManager();
+		}else if(authority.equals("ROLE_SUPERVISOR")) {
+			int dep_id = departmentService.findIdByUsername(username);
+			return applicationRepository.findApplicationsForSupervisor(dep_id);
+		}else if(authority.equals("ROLE_PDEMPLOYEE")) {
+			int emp_id = employeeService.findIdByUsername(username);
+			return applicationRepository.findApplicationsForPDEmployee(emp_id);
+		}
+		return applications;	
 	}
+	
+	public void acceptApplication(int id, String username) {
+		String authority = userService.findAuthorityByUsername(username);
 
-	public List<ApplicationResponse> retrieveApplicationsForSupervisor() {
-		return applicationRepository.findApplicationsForSupervisor();
+		if(authority.equals("ROLE_MANAGER")) {
+			applicationRepository.managerAcceptsApplication(id);
+		}else if(authority.equals("ROLE_SUPERVISOR")) {
+			applicationRepository.supervisorAcceptsApplication(id);
+		}else if(authority.equals("ROLE_PDEMPLOYEE")) {
+			applicationRepository.pdAcceptsApplication(id);
+		}
+		
 	}
+	
+	public void rejectApplication(int id, String username) {
+		String authority = userService.findAuthorityByUsername(username);
 
-	public List<ApplicationResponse> retrieveApplicationsForPDEmployee() {
-		return applicationRepository.findApplicationsForPDEmployee();
-	}
-
-	public List<ApplicationResponse> retrieveApplicationsForManager() {
-		return applicationRepository.findApplicationsForManager();
+		if(authority.equals("ROLE_MANAGER")) {
+			applicationRepository.managerRejectsApplication(id);
+		}else if(authority.equals("ROLE_SUPERVISOR")) {
+			applicationRepository.supervisorRejectsApplication(id);
+		}
+		
 	}
 }

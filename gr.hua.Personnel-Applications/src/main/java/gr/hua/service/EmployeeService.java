@@ -73,4 +73,8 @@ public class EmployeeService {
 		employeeRepository.supervisorDegradation(username);
 	}
 	
+	public int findIdByUsername(String username) {
+		return employeeRepository.findIdByUsername(username);
+	}
+	
 }

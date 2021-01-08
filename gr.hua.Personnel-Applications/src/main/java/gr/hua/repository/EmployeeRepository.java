@@ -47,4 +47,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	@Modifying
 	@Query(value="update authorities set authority = 'ROLE_EMPLOYEE' where username = ?1", nativeQuery=true)
 	public void supervisorDegradation(String username);
+	
+	@Query(value="select e.emp_id from employee e where e.username_fk=?1", nativeQuery=true)
+	public int findIdByUsername(String username);
 }
