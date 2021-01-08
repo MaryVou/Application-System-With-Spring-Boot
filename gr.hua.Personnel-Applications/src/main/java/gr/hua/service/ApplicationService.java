@@ -65,4 +65,18 @@ public class ApplicationService {
 		}
 		
 	}
+	
+	public List<ApplicationResponse> retrieveHistory(String username){
+		String authority = userService.findAuthorityByUsername(username);
+		List<ApplicationResponse> applications = null;
+
+		if(authority.equals("ROLE_MANAGER")) {
+			applications = applicationRepository.findHistoryForManager();
+		}else if(authority.equals("ROLE_SUPERVISOR")) {
+			int dep_id = departmentService.findIdByUsername(username);
+			applications = applicationRepository.findHistoryForSupervisor(dep_id);
+		}
+		
+		return applications;
+	}
 }

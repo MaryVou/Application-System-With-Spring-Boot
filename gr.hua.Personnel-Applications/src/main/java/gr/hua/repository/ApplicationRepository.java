@@ -73,4 +73,20 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 	@Modifying
 	@Query(value="Update application set super_sig=0 where app_id=?1", nativeQuery=true)
 	public void supervisorRejectsApplication(int id);
+	
+	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
+			+ ",a.mgr_sig, a.employee.id) from Application a where"
+			+ "((a.mgr_sig=0) or "
+			+ "(a.mgr_sig=1)) or "
+			+ "((a.super_sig=0) or "
+			+ "(a.super_sig=1))")
+	public List<ApplicationResponse> findHistoryForManager();
+	
+	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
+			+ ",a.mgr_sig, a.employee.id) from Application a, Department d where"
+			+ "((a.super_sig=0) or "
+			+ "(a.super_sig=1)) and "
+			+ "d.id = ?1")
+	public List<ApplicationResponse> findHistoryForSupervisor(int dep_id);
 }
+

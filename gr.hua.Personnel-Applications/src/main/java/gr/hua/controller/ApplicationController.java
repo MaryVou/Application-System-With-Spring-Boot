@@ -26,7 +26,9 @@ public class ApplicationController {
 	public String retrieveAllApplications(Model model){
 		String connected_user = SecurityContextHolder.getContext().getAuthentication().getName();
 		List<ApplicationResponse> applications = applicationService.retrieveApplications(connected_user);
+		List<ApplicationResponse> history = applicationService.retrieveHistory(connected_user);
 		model.addAttribute("allApplications", applications);
+		model.addAttribute("history", history);
 		return "viewApplications";
 	}
 	
