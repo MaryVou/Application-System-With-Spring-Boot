@@ -4,11 +4,13 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="Background.css">
 <title>Employees</title>
+<link rel="stylesheet" href="resources/css/Background.css" th:href="@{/css/Background.css}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <style> table { border: 1px solid black; } </style>
 </head>
-<body>
+<body style="text-align:center;padding: 30px 0;">
 
-	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
+	<div class="gradient-background" class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
 		<h1 class="text-light">Employees</h1>
 		<div th:switch="${employees}">
 			<h2 th:case="null">

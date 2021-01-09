@@ -5,6 +5,9 @@
 <link rel="stylesheet" href="mystyle.css">
 <title>Applications</title>
 
+<link rel="stylesheet" href="resources/css/Background.css" th:href="@{/css/Background.css}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 <style> table { border: 1px solid black; } </style>
 <script>
   function showTable(){
@@ -15,10 +18,10 @@
   }
 </script>
 </head>
-<body onload="javascript:hideTable()">
+<body onload="javascript:hideTable()" style="text-align:center;padding: 30px 0;">
 	
 	
-	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
+	<div class="gradient-background" class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
 		<h1 class="text-light">Applications</h1>
 		<form action="Viewapps" method="post">
 			<table width=100%>

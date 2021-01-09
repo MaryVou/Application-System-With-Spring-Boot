@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="Background.css">
 <title>Departments</title>
+
+<link rel="stylesheet" href="resources/css/Background.css" th:href="@{/css/Background.css}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <style> table { border: 1px solid black; } </style>
 </head>
-<body>
-	
-
-	
-	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
+<body style="text-align:center;padding: 30px 0;">
+		
+	<div class="gradient-background" class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
 		<h1 class="text-light">Departments</h1>
 		<form action = "ViewDepartments" method = "post">
 			<div th:switch="${departments}">
