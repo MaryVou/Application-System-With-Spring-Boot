@@ -96,7 +96,9 @@
 						<td th:text="${app.req_papers}"></td>
 						<td sec:authorize="hasRole('ROLE_MANAGER')"
 							th:text="${app.mgr_sig}"></td>
+						<div th:if="${#request.isUserInRole('MANAGER') or #request.isUserInRole('SUPERVISOR')}">
 						<td th:text="${app.super_sig}"></td>
+						</div>
 					</tr>
 				</tbody>
 			</table>
