@@ -2,13 +2,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="Background.css">
 <title>Departments</title>
-
-<style> table, th, td { border: 1px solid black; padding: 5px; } </style>
+<style> table { border: 1px solid black; } </style>
 </head>
-<body style="background-image: url('https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg?size=626&ext=jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
-	<div align =  "center">
-		<h1 style="font-family: Arial, Helvetica, sans-serif; color: grey;"> DEPARTMENTS </h1>
+<body>
+	
+
+	
+	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
+		<h1 class="text-light">Departments</h1>
 		<form action = "ViewDepartments" method = "post">
 			<div th:switch="${departments}">
 				<h2 th:case="null">
@@ -25,13 +28,12 @@
 				<table width=100%>
 					<thead>
 						<tr style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
-							<th>ID</th>
-							<th>NAME</th>
-							<th>SUPERVISOR ID</th>
-							<th>SUPERVISOR FIRST NAME</th>
-							<th>SUPERVISOR LAST NAME</th>
-							<th>SUPERVISOR EMAIL</th>
-							<!--<th sec:authorize="hasRole('ROLE_ADMIN')">DELETE</th>-->
+							<th>Id</th>
+							<th>Name</th>
+							<th>Supervisor ID</th>
+							<th>Supervisor First name</th>
+							<th>Supervisor Last name</th>
+							<th>Supervisor Email</th>
 						</tr>
 					</thead>
 					<tbody style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
@@ -42,15 +44,17 @@
 							<td th:text="${department.super_fname}"></td>
 							<td th:text="${department.super_lname}"></td>
 							<td th:text="${department.super_email}"></td>
-							<!--<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/departments/delete/{id}(id=${department.dep_id})}" >&#128465;</a></td>-->
 						</tr>
 					</tbody>
 				</table>
-			<!-- 
 			<div sec:authorize="hasRole('ROLE_ADMIN')">
 				<p style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;"> <a href="/departments/new">Add a new department</a> </p>
-			</div>-->
+			</div>
 		</form>
+	</div>
+	
+	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
+		<a href="/logout" style="color:white";> &#10060 LOGOUT</a>
 	</div>
 </body>
 </html>

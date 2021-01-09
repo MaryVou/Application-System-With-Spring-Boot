@@ -2,40 +2,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="Background.css">
 <title>Employees</title>
-
-<style> table, th, td { border: 1px solid black; padding: 5px; } </style>
+<style> table { border: 1px solid black; } </style>
 </head>
-<body style="background-image: url('https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg?size=626&ext=jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
-	<div align =  "center">
-		<h1 style="font-family: Arial, Helvetica, sans-serif; color: grey;"> EMPLOYEES </h1>
-			<div th:switch="${employees}">
-				<h2 th:case="null">
-					<table>
-						<tr> <td> </td> </tr>	
-						<tr> <td> </td> </tr>
-						<tr> <td> </td> </tr>
-						<tr> <td> </td> </tr>
-						<tr style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> NO EMPLOYEES YET </tr>
-					</table>
+<body>
+
+	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
+		<h1 class="text-light">Employees</h1>
+		<div th:switch="${employees}">
+			<h2 th:case="null">
+				<table>
+					<tr> <td> </td> </tr>	
+					<tr> <td> </td> </tr>
+					<tr> <td> </td> </tr>
+					<tr> <td> </td> </tr>
+					<tr style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> No employees yet ! </tr>
+				</table>
+			</h2>
 				
-				</h2>
 			<div th:case="*">
+			
 				<table width=100%>
 					<thead>
 						<tr style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
 							
-							<th>EMPLOYEE ID</th>
-							<th>FIRST NAME</th>
-							<th>LAST NAME</th>
-							<th>BIRTHDATE</th>
-							<th>ADDRESS</th>
-							<th>EMAIL</th>
-							<th>PHONE NUMBER</th>
-							<th>HIRE DATE</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">DELETE</th>
+							<th>Employee ID</th>
+							<th>First name</th>
+							<th>Last name</th>
+							<th>BirthDate</th>
+							<th>Address</th>
+							<th>Email</th>
+							<th>Phone number</th>
+							<th>Hire date</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
 						</tr>
 					</thead>
+					
 					<tbody style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
 						<tr th:each="employee : ${employees}">
 						
@@ -51,11 +54,20 @@
 							
 						</tr>
 					</tbody>
+					
 				</table>
-			<div sec:authorize="hasRole('ROLE_ADMIN')">
-				<p style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;"> <a href="/employees/new">Add a new user</a> </p>
+				
+				<div sec:authorize="hasRole('ROLE_ADMIN')">
+					<p style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;"> <a href="/employees/new">Add a new user</a> </p>
+				</div>
 			</div>
+		</div>
 	</div>
+	
+	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
+		<a href="/logout" style="color:white";> &#10060 LOGOUT</a>
+	</div>
+		
 </body>
 
 </html>

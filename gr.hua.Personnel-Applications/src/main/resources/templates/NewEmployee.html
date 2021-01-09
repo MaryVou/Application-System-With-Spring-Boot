@@ -2,11 +2,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="Background.css">
 <title>Add a new Employee</title>
 </head>
-<body style="background-image: url('https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg?size=626&ext=jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
-	<div align =  "center">
-		<h1 style="font-family: Arial, Helvetica, sans-serif; color: grey;"> NEW EMPLOYEE FORM </h1>
+
+<body>
+	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
+	
+		<h1 class="text-light">New employee form</h1>
 		
 		<form th:action="@{/employees/new}" th:object="${data}" method="post" >
 			<table>
@@ -21,16 +24,17 @@
 				<tr for="address" style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> <td> ADDRESS : </td> <td style = "font-size: 25px;"> <input type = "text" name = "address" th:field="*{address}" th:required="required"> </td> </tr>
 				<tr for="birthdate" style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> <td> BIRTHDATE : </td> <td style = "font-size: 25px;"> <input type = "date" name="birthdate" value="1999-01-01" min="1940-01-01" max="2002-01-01" th:field="*{birth_date}" th:required="required"> </td> </tr>					
 				<tr for="hiredate" style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> <td> HIRE DATE : </td> <td style = "font-size: 25px;"> <input type = "date" name="hiredate" value="2020-01-01" min="2020-01-01" max="2022-12-31" th:field="*{hire_date}" th:required="required"> </td> </tr>
-				<tr for="departmentname" style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> <td> DEPARTMENT NAME : </td> <td style = "font-size: 25px;"> 
-				<select th:field="*{dep_name}">
-            	<option th:each="dep: ${departments}" th:value="${dep}" th:text="${dep}"></option>
-				</select> </td> </tr>
+				<tr for="departmentname" style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> <td> DEPARTMENT NAME : </td> <td style = "font-size: 25px;"> <input type = "text" name = "departmentname" th:field="*{dep_name}" th:required="required"> </td> </tr>
 				<tr for="username" style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> <td> USERNAME : </td> <td style = "font-size: 25px;"> <input type = "text" name = "username" th:field="*{username}" th:required="required"> </td> </tr>
 				<tr for="password" style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> <td> PASSWORD : </td> <td style = "font-size: 25px;"> <input type = "password" name = "password" th:field="*{password}" th:required="required"> </td> </tr>	
 				<tr style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> <td> <input type = "submit"> </td> </tr>
 			</table>
 		</form>
 	</div>
+	
+	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
+		<a href="/logout" style="color:white";> &#10060 LOGOUT</a>
+	</div>		
 
 </body>
 </html>
