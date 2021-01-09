@@ -94,10 +94,9 @@
 						<td th:text="${app.start_date}"></td>
 						<td th:text="${app.last_date}"></td>
 						<td th:text="${app.req_papers}"></td>
-						<td sec:authorize="hasRole('ROLE_SUPERVISOR')"
-							th:text="${app.super_sig}"></td>
 						<td sec:authorize="hasRole('ROLE_MANAGER')"
 							th:text="${app.mgr_sig}"></td>
+						<td th:text="${app.super_sig}"></td>
 					</tr>
 				</tbody>
 			</table>
