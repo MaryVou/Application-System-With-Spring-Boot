@@ -18,7 +18,7 @@
   }
 </script>
 </head>
-<body onload="javascript:hideTable()" style="text-align:center;padding: 30px 0;">
+<body style="text-align:center;padding: 30px 0;">
 	
 	
 	<div class="gradient-background" class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
@@ -63,10 +63,12 @@
 				</tbody>
 			</table>
 			
+			<div th:if="${#request.isUserInRole('MANAGER') or #request.isUserInRole('SUPERVISOR')}">
 			<input type='button' onClick='javascript:showTable();' value='Show History'>
   			<input type='button' onClick='javascript:hideTable();' value='Hide History'>
+  			
   
-			<table1 width=100%>
+			<table1 width=100% style="visibility:hidden">
 				<thead>
 					<tr
 						style="font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
@@ -77,9 +79,8 @@
 						<th>Start date</th>
 						<th>Last date</th>
 						<th>Requested papers</th>
-						<th sec:authorize="hasRole('ROLE_SUPERVISOR')">Supervisor sign</th>
-						<th sec:authorize="hasRole('ROLE_PDEMPLOYEE')">Payroll department sign</th>
-						<th sec:authorize="hasRole('ROLE_MANAGER')">Manager sign</th>
+						<th>Sign</th>
+						<th sec:authorize="hasRole('ROLE_MANAGER')">Supervisor sign</th>
 					</tr>
 				</thead>
 				<tbody 
@@ -94,13 +95,12 @@
 						<td th:text="${app.req_papers}"></td>
 						<td sec:authorize="hasRole('ROLE_SUPERVISOR')"
 							th:text="${app.super_sig}"></td>
-						<td sec:authorize="hasRole('ROLE_PDEMPLOYEE')"
-							th:text="${app.pd_sig}"></td>
 						<td sec:authorize="hasRole('ROLE_MANAGER')"
 							th:text="${app.mgr_sig}"></td>
 					</tr>
 				</tbody>
 			</table1>
+			</div>
 		</form>
 	</div>
 	
