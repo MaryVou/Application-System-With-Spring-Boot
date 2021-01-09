@@ -18,13 +18,14 @@
   }
 </script>
 </head>
-<body style="text-align:center;padding: 30px 0;">
+<body class="gradient-background" style="text-align:center;padding: 30px 0;">
 	
 	
-	<div class="gradient-background" class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
+	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
+	<div class="container">
 		<h1 class="text-light">Applications</h1>
 		<form action="Viewapps" method="post">
-			<table width=100%>
+			<table class="table table-bordered" width=100%>
 				<thead>
 					<tr
 						style="font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
@@ -66,9 +67,9 @@
 			<div th:if="${#request.isUserInRole('MANAGER') or #request.isUserInRole('SUPERVISOR')}">
 			<input type='button' onClick='javascript:showTable();' value='Show History'>
   			<input type='button' onClick='javascript:hideTable();' value='Hide History'>
-  			
+  			<br><br>
   
-			<table1 width=100% style="visibility:hidden">
+			<table id="table1" width=100% style="visibility:hidden" class="table table-bordered">
 				<thead>
 					<tr
 						style="font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
@@ -85,7 +86,7 @@
 				</thead>
 				<tbody 
 					style="font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
-					<tr th:each="app : ${allApplications}">
+					<tr th:each="app : ${history}">
 						<td th:text="${app.id}"></td>
 						<td th:text="${app.emp_id}"></td>
 						<td th:text="${app.type}"></td>
@@ -99,13 +100,14 @@
 							th:text="${app.mgr_sig}"></td>
 					</tr>
 				</tbody>
-			</table1>
+			</table>
 			</div>
 		</form>
 	</div>
 	
 	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
 		<a href="/logout" style="color:white";> &#10060 LOGOUT</a>
+	</div>
 	</div>
 </body>
 </html>

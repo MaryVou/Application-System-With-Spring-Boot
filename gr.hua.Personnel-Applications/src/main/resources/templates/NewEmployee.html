@@ -2,24 +2,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="Background.css">
 <title>Add a new Employee</title>
 
 <link rel="stylesheet" href="resources/css/Background.css" th:href="@{/css/Background.css}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<style> table { border: 1px solid black; column-width: 140px;} </style>
 </head>
 
-<body style="text-align:center;padding: 30px 0;">
-	<div class="gradient-background" class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
-	
+<body class="gradient-background" style="text-align:center;padding: 30px 0;">
+	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
+	<div class="container">
 		<h1 class="text-light">New employee form</h1>
 		
 		<form th:action="@{/employees/new}" th:object="${data}" method="post" >
-			<table>
-				<tr> <td> </td> </tr>	
-				<tr> <td> </td> </tr>
-				<tr> <td> </td> </tr>
-				<tr> <td> </td> </tr>			
+			<table class="table table-bordered">		
 				<tr for="firstname" style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> <td> FIRST NAME : </td> <td style = "font-size: 25px;"> <input type = "text" name = "firstname" th:field="*{fname}" th:required="required"> </td> </tr>
 				<tr for="lastname" style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> <td> LAST NAME : </td> <td style = "font-size: 25px;"> <input type = "text" name = "lastname" th:field="*{lname}" th:required="required"> </td> </tr>
 				<tr for="emailaddress" style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> <td> EMAIL : </td> <td style = "font-size: 25px;"> <input type = "text" name = "emailaddress" th:field="*{email}" th:required="required"> </td> </tr>
@@ -38,6 +35,6 @@
 	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
 		<a href="/logout" style="color:white";> &#10060 LOGOUT</a>
 	</div>		
-
+</div>
 </body>
 </html>

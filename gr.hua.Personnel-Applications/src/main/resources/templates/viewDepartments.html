@@ -9,24 +9,21 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <style> table { border: 1px solid black; } </style>
 </head>
-<body style="text-align:center;padding: 30px 0;">
+<body class="gradient-background" style="text-align:center;padding: 30px 0;">
 		
-	<div class="gradient-background" class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
+	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
+	<div class="container">
 		<h1 class="text-light">Departments</h1>
 		<form action = "ViewDepartments" method = "post">
 			<div th:switch="${departments}">
 				<h2 th:case="null">
-					<table>
-						<tr> <td> </td> </tr>	
-						<tr> <td> </td> </tr>
-						<tr> <td> </td> </tr>
-						<tr> <td> </td> </tr>
+					<table class="table table-bordered">
 						<tr style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> NO DEPARTMENTS YET </tr>
 					</table>
 				
 				</h2>
 			<div th:case="*">
-				<table width=100%>
+				<table width=100% class="table table-bordered">
 					<thead>
 						<tr style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
 							<th>Id</th>
@@ -56,6 +53,7 @@
 	
 	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
 		<a href="/logout" style="color:white";> &#10060 LOGOUT</a>
+	</div>
 	</div>
 </body>
 </html>
