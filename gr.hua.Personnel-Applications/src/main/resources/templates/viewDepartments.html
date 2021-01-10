@@ -6,26 +6,22 @@
 <title>Departments</title>
 
 <link rel="stylesheet" href="resources/css/Background.css" th:href="@{/css/Background.css}">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<style> table { border: 1px solid black; } </style>
+
 </head>
-<body class="gradient-background" style="text-align:center;padding: 30px 0;">
+<body class="mainbackground">
+	<div class="mainfont">	
+		<h1><a href="/logout" style="text-decoration: none; color:#D84424;font-size: 15px; text-align:right;">&#10060 LOGOUT</a></h1>
+			
+		<h2 style = "font-size: 50px; color:#064714;text-align:left;">Departments</h2>
 		
-	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
-	<div class="container">
-		<h1 class="text-light">Departments</h1>
 		<form action = "ViewDepartments" method = "post">
 			<div th:switch="${departments}">
-				<h2 th:case="null">
-					<table class="table table-bordered">
-						<tr style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> NO DEPARTMENTS YET </tr>
-					</table>
+				<h3 th:case="null" style = "font-size: 20px;"> No departments yet ! </h3>
 				
-				</h2>
 			<div th:case="*">
-				<table width=100% class="table table-bordered">
+				<table class="tableproperties">
 					<thead>
-						<tr style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
+						<tr style="background-color:#B3DA5E;color:#064714;">
 							<th>Id</th>
 							<th>Name</th>
 							<th>Supervisor ID</th>
@@ -34,7 +30,7 @@
 							<th>Supervisor Email</th>
 						</tr>
 					</thead>
-					<tbody style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
+					<tbody style = "font-size: 13px;background-color:#F3F3BC;">
 						<tr th:each="department : ${departments}">
 							<td th:text="${department.id}"></td>
 							<td th:text="${department.name}"></td>
@@ -45,15 +41,13 @@
 						</tr>
 					</tbody>
 				</table>
-			<div sec:authorize="hasRole('ROLE_ADMIN')">
-				<p style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;"> <a href="/departments/new">Add a new department</a> </p>
+				
+				<!-- <div sec:authorize="hasRole('ROLE_ADMIN')">
+					<p style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;"> <a href="/departments/new">Add a new department</a> </p>
+				</div>-->
+			</div>
 			</div>
 		</form>
-	</div>
-	
-	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
-		<a href="/logout" style="color:white";> &#10060 LOGOUT</a>
-	</div>
 	</div>
 </body>
 </html>

@@ -4,22 +4,18 @@
 <meta charset="UTF-8">
 <title>Welcome Page</title>
 <link rel="stylesheet" href="resources/css/Background.css" th:href="@{/css/Background.css}">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
-<body class="gradient-background" style="text-align:center;padding: 200px 0;">
-	<div >
-	<h1 class="text-light">Welcome !</h1>
+<body class="mainbackground">
+		
+	<h1 style = "font-size: 50px; color:#064714;" class="mainfont"> <b> Welcome ! </b></h1>
 
-	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
-		<a href="/employees" target="_blank" class="d-block btn btn-outline-light">Employees</a>
-		<a href="/departments" target="_blank" class="d-block btn btn-outline-light">Departments</a>
-		<a href="/applications" target="_blank" class="d-block btn btn-outline-light">Applications</a>
-	</div>
-	<br>														  
-	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
-		<a href="/logout" style="color:white";>&#10060 LOGOUT</a>
-	</div>	
-	</div>
+	<div class="mainfont"><b>
+		<a href="/employees" class="button" style = "font-size: 17px;color:#064714;" >Employees</a>
+		<a href="/departments" class="button" style = "font-size: 17px;color:#064714;" >Departments</a>
+		<a href="/applications" class="button" style = "font-size: 17px;color:#064714;">Applications</a>
+	</b></div>
+														  
+	<p><b><a href="/logout" style="text-decoration: none; color:#D84424;font-size: 15px;" class="mainfont">&#10060 LOGOUT</a></b></p>
 	
 </body>
 </html>

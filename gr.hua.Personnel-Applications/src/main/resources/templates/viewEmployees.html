@@ -5,73 +5,60 @@
 <link rel="stylesheet" href="Background.css">
 <title>Employees</title>
 <link rel="stylesheet" href="resources/css/Background.css" th:href="@{/css/Background.css}">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<style> table { border: 1px solid black; column-width: 140px;} </style>
-</head>
-<body class="gradient-background" style="text-align:center;padding: 30px 0;">
 
-	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
-		<div class="container">
-			<h1 class="text-light">Employees</h1>
-		
-		<div th:switch="${employees}">
-			<h2 th:case="null">
-				<table class="table table-bordered">
-					<tr> <td> </td> </tr>	
-					<tr> <td> </td> </tr>
-					<tr> <td> </td> </tr>
-					<tr> <td> </td> </tr>
-					<tr style = "font-size: 20px; font-family: Arial, Helvetica, sans-serif;"> No employees yet ! </tr>
-				</table>
-			</h2>
-				
-			<div th:case="*">
+</head>
+<body class="mainbackground">
+	
+		<div class="mainfont">
+			<h1><a href="/logout" style="text-decoration: none; color:#D84424;font-size: 15px; text-align:right;">&#10060 LOGOUT</a></h1>
 			
-				<table width=100% class="table table-bordered">
-					<thead>
-						<tr style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
-							
-							<th>Employee ID</th>
-							<th>First name</th>
-							<th>Last name</th>
-							<th>BirthDate</th>
-							<th>Address</th>
-							<th>Email</th>
-							<th>Phone number</th>
-							<th>Hire date</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
-						</tr>
-					</thead>
+			<h2 style = "font-size: 50px; color:#064714;text-align:left;">Employees</h2>
+			
+			<div th:switch="${employees}">
+				<h3 th:case="null" style = "font-size: 20px;"> No employees yet ! </h3>
 					
-					<tbody style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;">
-						<tr th:each="employee : ${employees}">
-						
-							<td th:text="${employee.id}"></td>
-							<td th:text="${employee.fname}"></td>
-							<td th:text="${employee.lname}"></td>
-							<td th:text="${employee.birth_date}"></td>
-							<td th:text="${employee.address}"></td>
-							<td th:text="${employee.email}"></td>
-							<td th:text="${employee.phone}"></td>
-							<td th:text="${employee.hire_date}"></td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/employees/delete/{id}(id=${employee.id})}" >&#128465;</a></td>
-							
-						</tr>
-					</tbody>
+				<div th:case="*">
 					
-				</table>
-				
-				<div sec:authorize="hasRole('ROLE_ADMIN')">
-					<p style = "font-size: 18px; font-family: Arial, Helvetica, sans-serif;"> <a href="/employees/new">Add a new user</a> </p>
+					<table class="tableproperties">
+						<thead>
+							<tr style="background-color:#B3DA5E;color:#064714;">
+									
+								<th>Employee ID</th>
+								<th>First name</th>
+								<th>Last name</th>
+								<th>BirthDate</th>
+								<th>Address</th>
+								<th>Email</th>
+								<th>Phone number</th>
+								<th>Hire date</th>
+								<th sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
+							</tr>
+						</thead>
+							
+						<tbody style = "font-size: 13px;background-color:#F3F3BC;">
+							<tr th:each="employee : ${employees}">
+								
+								<td th:text="${employee.id}"></td>
+								<td th:text="${employee.fname}"></td>
+								<td th:text="${employee.lname}"></td>
+								<td th:text="${employee.birth_date}"></td>
+								<td th:text="${employee.address}"></td>
+								<td th:text="${employee.email}"></td>
+								<td th:text="${employee.phone}"></td>
+								<td th:text="${employee.hire_date}"></td>
+								<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/employees/delete/{id}(id=${employee.id})}" style="text-decoration: none;font-size:17px;">&#128465;</a></td>
+									
+							</tr>
+						</tbody>
+					</table>
+					
+					<div sec:authorize="hasRole('ROLE_ADMIN')">
+						<p> <a href="/employees/new" style = "font-size: 18px; color:#064714;">Add a new user</a> </p>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
-		<a href="/logout" style="color:white";> &#10060 LOGOUT</a>
-	</div>
-</div>			
+							
 </body>
 
 </html>
