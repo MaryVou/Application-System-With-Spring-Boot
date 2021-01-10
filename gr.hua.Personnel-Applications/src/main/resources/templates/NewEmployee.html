@@ -7,6 +7,7 @@
 </head>
 
 <body class="mainbackground">
+<div th:if="${#request.isUserInRole('ADMIN')}">
 	<div class="mainfont">
 		
 		<h1><a href="/logout" style="text-decoration: none; color:#D84424;font-size: 15px; text-align:right;">&#10060 LOGOUT</a></h1>
@@ -22,12 +23,20 @@
 					<tr for="address" style = "font-size: 20px;"> <td> ADDRESS : </td> <td style = "font-size: 20px;"> <input type = "text" name = "address" th:field="*{address}" th:required="required"> </td> </tr>
 					<tr for="birthdate" style = "font-size: 20px;"> <td> BIRTHDATE : </td> <td style = "font-size: 20px;"> <input type = "date" name="birthdate" value="1999-01-01" min="1940-01-01" max="2002-01-01" th:field="*{birth_date}" th:required="required"> </td> </tr>					
 					<tr for="hiredate" style = "font-size: 20px;"> <td> HIRE DATE : </td> <td style = "font-size: 20px;"> <input type = "date" name="hiredate" value="2020-01-01" min="2020-01-01" max="2022-12-31" th:field="*{hire_date}" th:required="required"> </td> </tr>
-					<tr for="departmentname" style = "font-size: 20px;"> <td> DEPARTMENT NAME : </td> <td style = "font-size: 20px;"> <input type = "text" name = "departmentname" th:field="*{dep_name}" th:required="required"> </td> </tr>
+					<tr for="departmentname" style = "font-size: 20px;"> <td> DEPARTMENT NAME : </td> <td style = "font-size: 20px;"> <select th:required="required" th:field="*{dep_name}">
+           	 		<option th:each="dep_name: ${departments}" th:value="${dep_name}" th:text="${dep_name}"></option></select> </td> </tr>
 					<tr for="username" style = "font-size: 20px; "> <td> USERNAME : </td> <td style = "font-size: 20px;"> <input type = "text" name = "username" th:field="*{username}" th:required="required"> </td> </tr>
 					<tr for="password" style = "font-size: 20px;"> <td> PASSWORD : </td> <td style = "font-size: 20px;"> <input type = "password" name = "password" th:field="*{password}" th:required="required"> </td> </tr>	
 					<tr style = "font-size: 20px;"> <td> <input type = "submit"> </td> </tr>
 				</table>
 		</form>
 	</div>
+</div>
+<div th:if="${#request.isUserInRole('MANAGER') or #request.isUserInRole('SUPERVISOR') or #request.isUserInRole('PDEMPLOYEE')}">
+	<div class="mainfront">
+		<h1><a href="/logout" style="text-decoration: none; color:#D84424;font-size: 15px; text-align:right;">&#10060 LOGOUT</a></h1>
+		<h2 style = "font-size: 50px; color:#064714;">Not authorized for this action!</h2>
+	</div>
+</div>
 </body>
 </html>
