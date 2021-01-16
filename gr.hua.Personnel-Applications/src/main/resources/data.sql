@@ -47,22 +47,22 @@ INSERT INTO authorities(username,authority)
 		)t
 	WHERE NOT EXISTS(SELECT * FROM `authorities`);			
 
-INSERT INTO employee(f_name,l_name,email,phone,address,birth_date,hire_date,dep_id_fk,username_fk)
+INSERT INTO employee(f_name,l_name,email,phone,address,birth_date,hire_date,works_since,dep_id_fk,username_fk)
 	select t.*
-	from((SELECT 'Jane' as col1,'Doe' as col2,'manager@gmail.com' as col3,'6909090901' as col4,'Somewhere on the map' as col5,'1999-05-20' as col6,'2020-12-10' as col7, null as col8,'Manager' as col9) union all
-		(SELECT 'Jane','Doe','super1@gmail.com','6909090902','Somewhere on the map','1999-09-23','2020-12-10', 1, 'Supervisor1') union all
-		(SELECT 'Jane','Doe','super2@gmail.com','6909090903','Somewhere on the map','1999-09-23','2020-12-10', 2, 'Supervisor2') union all
-		(SELECT 'Jane','Doe','super3@gmail.com','6909090904','Somewhere on the map','1999-09-23','2020-12-10', 3, 'Supervisor3') union all
-		(SELECT 'Jane','Doe','super4@gmail.com','6909090905','Somewhere on the map','1999-09-23','2020-12-10', 4, 'Supervisor4') union all
-		(SELECT 'Jane','Doe','admin@gmail.com','6909090906','Somewhere on the map','1999-09-23','2020-12-10', 1, 'Admin') union all
-		(SELECT 'Jane','Doe','it1@gmail.com','6909090907','Somewhere on the map','1999-09-23','2020-12-10', 1, 'It_Employee1') union all
-		(SELECT 'Jane','Doe','it2@gmail.com','6909090908','Somewhere on the map','1999-09-23','2020-12-10', 1, 'It_Employee2') union all
-		(SELECT 'Jane','Doe','pd1@gmail.com','6909090909','Somewhere on the map','1999-09-23','2020-12-10', 2, 'PD_Employee1') union all
-		(SELECT 'Jane','Doe','pd2@gmail.com','6909090910','Somewhere on the map','1999-09-23','2020-12-10', 2, 'PD_Employee2') union all
-		(SELECT 'Jane','Doe','hr1@gmail.com','6909090911','Somewhere on the map','1999-09-23','2020-12-10', 3, 'HR_Employee1') union all
-		(SELECT 'Jane','Doe','hr2@gmail.com','6909090912','Somewhere on the map','1999-09-23','2020-12-10', 3, 'HR_Employee2') union all
-		(SELECT 'Jane','Doe','m1@gmail.com','6909090913','Somewhere on the map','1999-09-23','2020-12-10', 4, 'M_Employee1') union all
-		(SELECT 'Jane','Doe','m2@gmail.com','6909090914','Somewhere on the map','1999-09-23','2020-12-10', 4, 'M_Employee2')
+	from((SELECT 'Jane' as col1,'Doe' as col2,'manager@gmail.com' as col3,'6909090901' as col4,'Somewhere on the map' as col5,'1999-05-20' as col6,'2020-12-10' as col7, '2020-12-10' as col8, null as col9,'Manager' as col10) union all
+		(SELECT 'Jane','Doe','super1@gmail.com','6909090902','Somewhere on the map','1999-09-23','2020-12-10','2020-12-10', 1, 'Supervisor1') union all
+		(SELECT 'Jane','Doe','super2@gmail.com','6909090903','Somewhere on the map','1999-09-23','2020-12-10','2020-12-10', 2, 'Supervisor2') union all
+		(SELECT 'Jane','Doe','super3@gmail.com','6909090904','Somewhere on the map','1999-09-23','2020-12-10','2020-12-10', 3, 'Supervisor3') union all
+		(SELECT 'Jane','Doe','super4@gmail.com','6909090905','Somewhere on the map','1999-09-23','2020-12-10','2020-12-10', 4, 'Supervisor4') union all
+		(SELECT 'Jane','Doe','admin@gmail.com','6909090906','Somewhere on the map','1999-09-23','2020-12-10','2020-12-10', 1, 'Admin') union all
+		(SELECT 'Jane','Doe','it1@gmail.com','6909090907','Somewhere on the map','1999-09-23','2020-12-10','2020-12-10', 1, 'It_Employee1') union all
+		(SELECT 'Jane','Doe','it2@gmail.com','6909090908','Somewhere on the map','1999-09-23','2020-12-10','2020-12-10', 1, 'It_Employee2') union all
+		(SELECT 'Jane','Doe','pd1@gmail.com','6909090909','Somewhere on the map','1999-09-23','2020-12-10','2020-12-10', 2, 'PD_Employee1') union all
+		(SELECT 'Jane','Doe','pd2@gmail.com','6909090910','Somewhere on the map','1999-09-23','2020-12-10','2020-12-10', 2, 'PD_Employee2') union all
+		(SELECT 'Jane','Doe','hr1@gmail.com','6909090911','Somewhere on the map','1999-09-23','2020-12-10','2020-12-10', 3, 'HR_Employee1') union all
+		(SELECT 'Jane','Doe','hr2@gmail.com','6909090912','Somewhere on the map','1999-09-23','2020-12-10','2020-12-10', 3, 'HR_Employee2') union all
+		(SELECT 'Jane','Doe','m1@gmail.com','6909090913','Somewhere on the map','1999-09-23','2020-12-10','2020-12-10', 4, 'M_Employee1') union all
+		(SELECT 'Jane','Doe','m2@gmail.com','6909090914','Somewhere on the map','1999-09-23','2020-12-10','2020-12-10', 4, 'M_Employee2')
 		)t
 	WHERE NOT EXISTS(SELECT * FROM `employee`);
 

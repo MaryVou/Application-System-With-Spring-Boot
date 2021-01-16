@@ -12,10 +12,12 @@ public class EmployeeRequest {
 	private String email;
 	private String phone;
 	private String address;
-	@DateTimeFormat(iso=ISO.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date birth_date;
-	@DateTimeFormat(iso=ISO.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date hire_date;
+	@DateTimeFormat(iso = ISO.DATE)
+	private Date works_since;
 	private String username;
 	private String password;
 	private String dep_name;
@@ -25,7 +27,7 @@ public class EmployeeRequest {
 	}
 
 	public EmployeeRequest(String fname, String lname, String email, String phone, String address, Date birth_date,
-			Date hire_date, String username, String password, String dep_name) {
+			Date hire_date, Date works_since, String username, String password, String dep_name) {
 		super();
 		this.fname = fname;
 		this.lname = lname;
@@ -34,6 +36,7 @@ public class EmployeeRequest {
 		this.address = address;
 		this.birth_date = birth_date;
 		this.hire_date = hire_date;
+		this.works_since = works_since;
 		this.username = username;
 		this.password = password;
 		this.dep_name = dep_name;
@@ -95,6 +98,14 @@ public class EmployeeRequest {
 		this.hire_date = hire_date;
 	}
 
+	public Date getWorks_since() {
+		return works_since;
+	}
+
+	public void setWorks_since(Date works_since) {
+		this.works_since = works_since;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -122,8 +133,8 @@ public class EmployeeRequest {
 	@Override
 	public String toString() {
 		return "EmployeeRequest [fname=" + fname + ", lname=" + lname + ", email=" + email + ", phone=" + phone
-				+ ", address=" + address + ", birth_date=" + birth_date + ", hire_date=" + hire_date + ", username="
-				+ username + ", password=" + password + ", dep_name=" + dep_name + "]";
+				+ ", address=" + address + ", birth_date=" + birth_date + ", hire_date=" + hire_date + ", works_since="
+				+ works_since + ", username=" + username + ", password=" + password + ", dep_name=" + dep_name + "]";
 	}
 
 }

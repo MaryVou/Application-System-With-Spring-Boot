@@ -38,7 +38,7 @@ public class EmployeeService {
 	
 	public Employee createEmployee(EmployeeRequest employeeRequest) {
 		Employee emp = new Employee(employeeRequest.getFname(),employeeRequest.getLname(), employeeRequest.getEmail(), employeeRequest.getPhone(), 
-				employeeRequest.getAddress(), employeeRequest.getBirth_date(), employeeRequest.getHire_date());
+				employeeRequest.getAddress(), employeeRequest.getBirth_date(), employeeRequest.getHire_date(), employeeRequest.getWorks_since());
 		Employee saved_emp = employeeRepository.save(emp);
 		int emp_id = saved_emp.getId();
 		

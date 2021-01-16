@@ -3,6 +3,7 @@ package gr.hua.controller;
 import java.util.List;
 import java.util.Optional;
 import java.net.URI;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -63,6 +64,7 @@ public class EmployeeController {
 		List<String> dep_names = departmentService.findDepartmentNames();
 		model.addAttribute("data", new EmployeeRequest());
 		model.addAttribute("departments", dep_names);
+		model.addAttribute("localDate", LocalDate.now());
 		return "NewEmployee";
 	}
 

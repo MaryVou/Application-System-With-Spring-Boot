@@ -49,6 +49,10 @@ public class Employee {
 	@Temporal(TemporalType.DATE)
 	private Date hire_date;
 
+	@Column(name = "works_since")
+	@Temporal(TemporalType.DATE)
+	private Date works_since;
+
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JsonIgnore
 	@JoinColumn(name = "dep_id_fk")
@@ -63,10 +67,8 @@ public class Employee {
 
 	}
 
-	// FOR TESTING ONLY!!!!!!!
-
 	public Employee(String fname, String lname, String email, String phone, String address, Date birth_date,
-			Date hire_date) {
+			Date hire_date, Date works_since) {
 		super();
 		this.fname = fname;
 		this.lname = lname;
@@ -75,6 +77,7 @@ public class Employee {
 		this.address = address;
 		this.birth_date = birth_date;
 		this.hire_date = hire_date;
+		this.works_since = works_since;
 	}
 
 	public int getId() {
@@ -141,6 +144,14 @@ public class Employee {
 		this.hire_date = hire_date;
 	}
 
+	public Date getWorks_since() {
+		return works_since;
+	}
+
+	public void setWorks_since(Date works_since) {
+		this.works_since = works_since;
+	}
+
 	public Department getDepartment() {
 		return department;
 	}
@@ -160,8 +171,8 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", phone=" + phone
-				+ ", address=" + address + ", birth_date=" + birth_date + ", hire_date=" + hire_date + ", department="
-				+ department.getName() + ", user=" + user.getUsername() + "]";
+				+ ", address=" + address + ", birth_date=" + birth_date + ", hire_date=" + hire_date + ", works_since="
+				+ works_since + ", department=" + department + ", user=" + user + "]";
 	}
 
 }

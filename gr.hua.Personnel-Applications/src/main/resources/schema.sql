@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `employee`(
 	`address` varchar(30) NOT NULL,
 	`birth_date` date NOT NULL,
 	`hire_date` date NOT NULL,
+	`works_since` date NOT NULL,
 	`dep_id_fk` int,
 	`username_fk` varchar(50),
 	PRIMARY KEY(`emp_id`),
