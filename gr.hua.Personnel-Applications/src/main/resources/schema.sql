@@ -43,7 +43,8 @@ CREATE TABLE IF NOT EXISTS `department`(
 CREATE TABLE IF NOT EXISTS `application`(
 	`app_id` int NOT NULL AUTO_INCREMENT,
 	`type` varchar(15) NOT NULL,
-	`days` int NOT NULL,
+	`category` varchar(20) DEFAULT NULL,
+	`days` int DEFAULT NULL,
 	`start_date` date NOT NULL,
 	`last_date` date NOT NULL,
 	`req_papers` blob,

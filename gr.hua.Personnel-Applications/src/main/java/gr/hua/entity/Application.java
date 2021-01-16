@@ -23,12 +23,15 @@ import org.hibernate.annotations.NotFoundAction;
 public class Application {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "app_id")
 	private int id;
 
 	@Column(name = "type")
 	private String type;
+
+	@Column(name = "category")
+	private String category;
 
 	@Column(name = "days")
 	private int days;
@@ -62,10 +65,11 @@ public class Application {
 
 	}
 
-	public Application(String type, int days, Date start_date, Date last_date, Blob req_papers, Boolean super_sig,
-			Boolean pd_sig, Boolean mgr_sig, Employee employee) {
+	public Application(String type, String category, int days, Date start_date, Date last_date, Blob req_papers,
+			Boolean super_sig, Boolean pd_sig, Boolean mgr_sig, Employee employee) {
 		super();
 		this.type = type;
+		this.category = category;
 		this.days = days;
 		this.start_date = start_date;
 		this.last_date = last_date;
@@ -90,6 +94,14 @@ public class Application {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public int getDays() {
@@ -158,9 +170,10 @@ public class Application {
 
 	@Override
 	public String toString() {
-		return "Application [id=" + id + ", type=" + type + ", days=" + days + ", start_date=" + start_date
-				+ ", last_date=" + last_date + ", req_papers=" + req_papers + ", super_sig=" + super_sig + ", pd_sig="
-				+ pd_sig + ", mgr_sig=" + mgr_sig + ", employee=" + employee.getId() + "]";
+		return "Application [id=" + id + ", type=" + type + ", category=" + category + ", days=" + days
+				+ ", start_date=" + start_date + ", last_date=" + last_date + ", req_papers=" + req_papers
+				+ ", super_sig=" + super_sig + ", pd_sig=" + pd_sig + ", mgr_sig=" + mgr_sig + ", employee=" + employee.getId()
+				+ "]";
 	}
 
 }

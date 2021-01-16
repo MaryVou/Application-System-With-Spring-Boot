@@ -26,7 +26,8 @@
 						<th>Application ID</th>
 						<th>Employee</th>
 						<th>Type</th>
-						<th>Days</th>
+						<th>Category</th>
+						<th>Days Left</th>
 						<th>Start date</th>
 						<th>Last date</th>
 						<th>Requested papers</th>
@@ -43,6 +44,7 @@
 						<td th:text="${app.id}"></td>
 						<td th:text="${app.emp_id}"></td>
 						<td th:text="${app.type}"></td>
+						<td th:text="${app.category}"></td>
 						<td th:text="${app.days}"></td>
 						<td th:text="${app.start_date}"></td>
 						<td th:text="${app.last_date}"></td>
@@ -72,7 +74,7 @@
 								<th>Application ID</th>
 								<th>Employee</th>
 								<th>Type</th>
-								<th>Days</th>
+								<th>Days Left</th>
 								<th>Start date</th>
 								<th>Last date</th>
 								<th>Requested papers</th>
@@ -85,6 +87,7 @@
 								<td th:text="${app.id}"></td>
 								<td th:text="${app.emp_id}"></td>
 								<td th:text="${app.type}"></td>
+								<td th:text="${app.category}"></td>
 								<td th:text="${app.days}"></td>
 								<td th:text="${app.start_date}"></td>
 								<td th:text="${app.last_date}"></td>

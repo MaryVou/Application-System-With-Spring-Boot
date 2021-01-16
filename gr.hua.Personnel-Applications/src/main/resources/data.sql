@@ -66,12 +66,12 @@ INSERT INTO employee(f_name,l_name,email,phone,address,birth_date,hire_date,dep_
 		)t
 	WHERE NOT EXISTS(SELECT * FROM `employee`);
 
-INSERT INTO application(type,days,start_date,last_date,emp_id_fk)
+INSERT INTO application(type,category,days,start_date,last_date,emp_id_fk)
 	select t.*
-	from((SELECT 'recovery' as col1, 3 as col2, '2020-12-17' as col3, '2020-12-20' as col4, 12 as col5) union all
-		(SELECT 'strike',2,'2020-12-12','2020-12-14',5) union all
-		(SELECT 'recovery',10,'2020-12-05','2020-12-14',11) union all
-		(SELECT 'student',2,'2020-12-12','2020-12-14',7)
+	from((SELECT 'recovery' as col1, null as col2, 4 as col3, '2020-12-17' as col4, '2020-12-20' as col5, 12 as col6) union all
+		(SELECT 'strike',null,3,'2020-12-12','2020-12-14',5) union all
+		(SELECT 'recovery',null,10,'2020-12-05','2020-12-14',11) union all
+		(SELECT 'special purpose','student',3,'2020-12-12','2020-12-14',7)
 		)t
 	WHERE NOT EXISTS(SELECT * FROM `application`);
 

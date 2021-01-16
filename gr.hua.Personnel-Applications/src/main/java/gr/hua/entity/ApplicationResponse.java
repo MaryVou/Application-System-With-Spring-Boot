@@ -7,6 +7,7 @@ public class ApplicationResponse {
 
 	private int id;
 	private String type;
+	private String category;
 	private int days;
 	private Date start_date;
 	private Date last_date;
@@ -16,11 +17,12 @@ public class ApplicationResponse {
 	private Boolean mgr_sig;
 	private int emp_id;
 
-	public ApplicationResponse(int id, String type, int days, Date start_date, Date last_date, Blob req_papers,
+	public ApplicationResponse(int id, String type, String category, int days, Date start_date, Date last_date, Blob req_papers,
 			Boolean super_sig, Boolean pd_sig, Boolean mgr_sig, int emp_id) {
 		super();
 		this.id = id;
 		this.type = type;
+		this.category = category;
 		this.days = days;
 		this.start_date = start_date;
 		this.last_date = last_date;
@@ -45,6 +47,15 @@ public class ApplicationResponse {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public int getDays() {

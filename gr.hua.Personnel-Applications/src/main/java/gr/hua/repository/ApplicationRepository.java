@@ -15,11 +15,11 @@ import gr.hua.entity.ApplicationResponse;
 @Transactional
 public interface ApplicationRepository extends JpaRepository<Application,Integer>{
 	
-	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
+	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.category, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
 			+ ",a.mgr_sig, a.employee.id) from Application a")
 	public List<ApplicationResponse> findAllApplications();
 	
-	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
+	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.category, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
 			+ ",a.mgr_sig, a.employee.id) from Application a, Employee e, User u, Authority auth "
 			+ "where a.employee.id=e.id and "
 			+ "a.super_sig=null and "
@@ -30,7 +30,7 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 			+ "(auth.authority='ROLE_PDEMPLOYEE'))")
 	public List<ApplicationResponse> findApplicationsForSupervisor(int dep_id);
 	
-	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
+	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.category, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
 			+ ",a.mgr_sig, a.employee.id) from Application a, Employee e, User u, Authority auth "
 			+ "where a.employee.id=e.id and "
 			+ "a.pd_sig=null and "
@@ -45,7 +45,7 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 			+ "(auth.authority='ROLE_SUPERVISOR'))")
 	public List<ApplicationResponse> findApplicationsForPDEmployee(int dep_id);
 	
-	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
+	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.category, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
 			+ ",a.mgr_sig, a.employee.id) from Application a, Employee e, User u, Authority auth "
 			+ "where a.employee.id=e.id and "
 			+ "a.mgr_sig=null and "
@@ -74,7 +74,7 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 	@Query(value="Update application set super_sig=0 where app_id=?1", nativeQuery=true)
 	public void supervisorRejectsApplication(int id);
 	
-	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
+	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.category, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
 			+ ",a.mgr_sig, a.employee.id) from Application a where"
 			+ "((a.mgr_sig=0) or "
 			+ "(a.mgr_sig=1)) or "
@@ -82,7 +82,7 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 			+ "(a.super_sig=1))")
 	public List<ApplicationResponse> findHistoryForManager();
 	
-	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
+	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.category, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
 			+ ",a.mgr_sig, a.employee.id) from Application a, Department d where"
 			+ "((a.super_sig=0) or "
 			+ "(a.super_sig=1)) and "
