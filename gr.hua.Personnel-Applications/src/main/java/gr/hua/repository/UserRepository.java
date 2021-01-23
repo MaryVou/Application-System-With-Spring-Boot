@@ -8,7 +8,7 @@ import gr.hua.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,String> {
-
+	
 	@Query(value="select authority from authorities a where a.username=?1",nativeQuery=true)
 	public String findAuthorityByUsername(String username);
 }

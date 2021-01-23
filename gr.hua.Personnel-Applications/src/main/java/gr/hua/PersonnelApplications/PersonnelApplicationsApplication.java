@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan("WebSecurityConfig")
 @EnableTransactionManagement
 @EntityScan("gr.hua.entity")
-@ComponentScan(basePackages={"gr.hua.controller","gr.hua.service"})
+@ComponentScan(basePackages={"gr.hua.controller","gr.hua.service","gr.hua.rest","gr.hua.jwt"})
 @EnableJpaRepositories("gr.hua.repository")
 public class PersonnelApplicationsApplication {
 
