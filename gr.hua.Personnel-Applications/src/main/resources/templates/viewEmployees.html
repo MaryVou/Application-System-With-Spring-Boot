@@ -48,14 +48,14 @@
 								<td th:text="${employee.phone}"></td>
 								<td th:text="${employee.hire_date}"></td>
 								<td th:text="${employee.works_since}"></td>
-								<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/employees/delete/{id}(id=${employee.id})}" style="text-decoration: none;font-size:17px;">&#128465;</a></td>
+								<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/index/employees/delete/{id}(id=${employee.id})}" style="text-decoration: none;font-size:17px;">&#128465;</a></td>
 									
 							</tr>
 						</tbody>
 					</table>
 					
 					<div sec:authorize="hasRole('ROLE_ADMIN')">
-						<p> <a href="/employees/new" style = "font-size: 18px; color:#064714;">Add a new user</a> </p>
+						<p> <a href="index/employees/new" style = "font-size: 18px; color:#064714;">Add a new user</a> </p>
 					</div>
 				</div>
 			</div>

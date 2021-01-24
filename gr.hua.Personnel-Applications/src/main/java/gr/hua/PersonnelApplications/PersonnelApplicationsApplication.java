@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-@ComponentScan("WebSecurityConfig")
+@ComponentScan("MultipleSecurityConfig")
 @EnableTransactionManagement
 @EntityScan("gr.hua.entity")
 @ComponentScan(basePackages={"gr.hua.controller","gr.hua.service","gr.hua.rest","gr.hua.jwt"})

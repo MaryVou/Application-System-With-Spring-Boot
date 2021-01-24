@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import gr.hua.entity.Employee;
@@ -34,7 +35,7 @@ public class EmployeeController {
 	@Autowired
 	private DepartmentService departmentService;
 
-	@GetMapping("/employees") // ADMIN , MANAGER, SUPERVISOR
+	@GetMapping("/index/employees") // ADMIN , MANAGER, SUPERVISOR
 	public String retrieveAllUsers(Model model) {
 		List<Employee> employees = employeeService.retrieveEmployees();
 		model.addAttribute("employees", employees);
@@ -53,13 +54,13 @@ public class EmployeeController {
 	 * return Employee.get(); }
 	 */
 
-	@GetMapping("/employees/delete/{id}")
+	@GetMapping("/index/employees/delete/{id}")
 	public String deleteEmployee(@PathVariable("id") int id, Model model) {
 		employeeService.deleteEmployee(id);
-		return "redirect:/employees";
+		return "redirect:/index/employees";
 	}
 
-	@GetMapping("/employees/new")
+	@GetMapping("/index/employees/new")
 	public String showEmployeeForm(Model model) {
 		List<String> dep_names = departmentService.findDepartmentNames();
 		model.addAttribute("data", new EmployeeRequest());
@@ -68,12 +69,12 @@ public class EmployeeController {
 		return "NewEmployee";
 	}
 
-	@PostMapping("/employees/new")
+	@PostMapping("/index/employees/new")
 	public String createEmployee(@ModelAttribute EmployeeRequest employeeRequest) {
 		System.out.println(employeeRequest.toString());
 		Employee savedEmployee = employeeService.createEmployee(employeeRequest);
 		System.out.println("Employee id " + savedEmployee.getId());
-		return "redirect:/employees";
+		return "redirect:/index/employees";
 	}
 
 }
