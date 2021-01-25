@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -17,12 +19,15 @@ public class User {
 	private String username;
 
 	@Column(name = "password")
+	@JsonIgnore
 	private String password;
 
 	@Column(name = "enabled")
+	@JsonIgnore
 	private Boolean enabled;
 
 	@Column(name = "emp_id")
+	@JsonIgnore
 	private int emp_id;
 
 	public User() {

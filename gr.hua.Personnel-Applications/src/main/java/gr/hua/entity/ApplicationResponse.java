@@ -3,6 +3,8 @@ package gr.hua.entity;
 import java.sql.Blob;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ApplicationResponse {
 
 	private int id;
@@ -13,8 +15,10 @@ public class ApplicationResponse {
 	private Date last_date;
 	private Blob req_papers;
 	private Boolean super_sig;
+	@JsonIgnore
 	private Boolean pd_sig;
 	private Boolean mgr_sig;
+	@JsonIgnore
 	private int emp_id;
 
 	public ApplicationResponse(int id, String type, String category, int days, Date start_date, Date last_date, Blob req_papers,

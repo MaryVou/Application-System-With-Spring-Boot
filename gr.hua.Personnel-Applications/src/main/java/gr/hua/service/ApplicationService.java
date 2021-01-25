@@ -79,4 +79,13 @@ public class ApplicationService {
 		
 		return applications;
 	}
+	
+	public void addApplication(Application application) {
+		applicationRepository.save(application);
+	}
+	
+	public List<ApplicationResponse> findPersonalApplications(String username){
+		int emp_id = employeeService.findIdByUsername(username);
+		return applicationRepository.findPersonalApplications(emp_id);
+	}
 }

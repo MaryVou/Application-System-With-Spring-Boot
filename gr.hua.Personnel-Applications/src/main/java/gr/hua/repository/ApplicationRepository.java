@@ -88,5 +88,10 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 			+ "(a.super_sig=1)) and "
 			+ "d.id = ?1")
 	public List<ApplicationResponse> findHistoryForSupervisor(int dep_id);
+	
+	@Query(value="select new gr.hua.entity.ApplicationResponse(a.id, a.type, a.category, a.days, a.start_date, a.last_date, a.req_papers, a.super_sig, a.pd_sig"
+			+ ",a.mgr_sig, a.employee.id) from Application a where"
+			+ " a.employee.id = ?1")
+	public List<ApplicationResponse> findPersonalApplications(int emp_id);
 }
 

@@ -54,12 +54,10 @@ public class Employee {
 	private Date works_since;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-	@JsonIgnore
 	@JoinColumn(name = "dep_id_fk")
 	private Department department;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JsonIgnore
 	@JoinColumn(name = "username_fk")
 	private User user;
 

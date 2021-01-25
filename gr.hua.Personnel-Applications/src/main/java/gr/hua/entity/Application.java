@@ -65,6 +65,17 @@ public class Application {
 
 	}
 
+	public Application(String type, String category, Date start_date, Date last_date, Blob req_papers) {
+		super();
+		this.type = type;
+		this.category = category;
+		this.start_date = start_date;
+		this.last_date = last_date;
+		this.req_papers = req_papers;
+	}
+
+
+
 	public Application(String type, String category, int days, Date start_date, Date last_date, Blob req_papers,
 			Boolean super_sig, Boolean pd_sig, Boolean mgr_sig, Employee employee) {
 		super();
