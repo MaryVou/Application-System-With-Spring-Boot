@@ -80,8 +80,9 @@ public class ApplicationService {
 		return applications;
 	}
 	
-	public void addApplication(Application application) {
-		applicationRepository.save(application);
+	public void addApplication(Application application, String username) {
+		Application app = applicationRepository.save(application);
+		applicationRepository.updateEmployeeId(employeeService.findIdByUsername(username),app.getId());
 	}
 	
 	public List<ApplicationResponse> findPersonalApplications(String username){

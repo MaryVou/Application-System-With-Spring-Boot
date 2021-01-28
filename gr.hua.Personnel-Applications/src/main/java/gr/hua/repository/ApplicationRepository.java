@@ -93,5 +93,9 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 			+ ",a.mgr_sig, a.employee.id) from Application a where"
 			+ " a.employee.id = ?1")
 	public List<ApplicationResponse> findPersonalApplications(int emp_id);
+	
+	@Modifying
+	@Query(value="update application set emp_id_fk=?1 where app_id=?2", nativeQuery=true)
+	public void updateEmployeeId(int emp_id, int app_id);
 }
 
