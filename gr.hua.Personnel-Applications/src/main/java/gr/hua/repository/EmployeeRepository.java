@@ -65,4 +65,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	@Query(value="select new gr.hua.entity.EmployeeRequest(e.fname,e.lname,e.email,e.phone) from Employee e, Authority a where a.authority='ROLE_PDEMPLOYEE' "
 			+ "and a.user.username!=?1 and e.user.username=a.user.username")
 	public List<EmployeeRequest> findPDEmployees(String username);
+	
+	@Modifying
+	@Query(value="update employee set days = ?1 where emp_id = ?2", nativeQuery=true)
+	public void updateDaysLeft(int days, int emp_id);
 }

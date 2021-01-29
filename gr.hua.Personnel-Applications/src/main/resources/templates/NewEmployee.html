@@ -14,7 +14,7 @@
 			
 		<h2 style = "font-size: 50px; color:#064714;">New employee form</h2>
 		
-		<form th:action="@{/employees/new}" th:object="${data}" method="post" >
+		<form th:action="@{/index/employees/new}" th:object="${data}" method="post" >
 				<table class="tableproperties" style="background-color:#F3F3BC;">		
 					<tr for="firstname" style = "font-size: 20px;"> <td> FIRST NAME : </td> <td style = "font-size: 20px;"> <input type = "text" name = "firstname" th:field="*{fname}" th:required="required"> </td> </tr>
 					<tr for="lastname" style = "font-size: 20px;"> <td> LAST NAME : </td> <td style = "font-size: 20px;"> <input type = "text" name = "lastname" th:field="*{lname}" th:required="required"> </td> </tr>

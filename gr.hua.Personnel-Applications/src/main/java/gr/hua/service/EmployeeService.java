@@ -22,6 +22,9 @@ public class EmployeeService {
 	@Autowired 
 	private DepartmentRepository departmentRepository;
 	
+	@Autowired 
+	private ApplicationService applicationService;
+	
 	@Autowired
 	private UserService userService;
 	
@@ -44,7 +47,7 @@ public class EmployeeService {
 		Employee emp = new Employee(employeeRequest.getFname(),employeeRequest.getLname(), employeeRequest.getEmail(), employeeRequest.getPhone(), 
 				employeeRequest.getAddress(), employeeRequest.getBirth_date(), employeeRequest.getHire_date(), employeeRequest.getWorks_since());
 		
-		//TODO calculate days before save
+		emp.setDays(applicationService.daysCalculator(emp.getWorks_since(), emp.getHire_date()));
 		
 		Employee saved_emp = employeeRepository.save(emp);
 		int emp_id = saved_emp.getId();
@@ -104,4 +107,7 @@ public class EmployeeService {
 		return contacts;
 	}
 	
+	public void updateDaysLeft(int days, int emp_id) {
+		employeeRepository.updateDaysLeft(days, emp_id);
+	}
 }

@@ -40,12 +40,7 @@ public class ApplicationRest {
 			e.printStackTrace();
 		}
 		if(application!=null) {
-			
-			//TODO check if days are enough and then add
-			//else return error message
-			
-			applicationService.addApplication(application, connected_user);
-			return new ResponseEntity(HttpStatus.OK);
+			return applicationService.addApplication(application, connected_user);
 		}
 		return new ResponseEntity(HttpStatus.BAD_REQUEST); 
 	}
