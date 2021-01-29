@@ -1,5 +1,6 @@
 package gr.hua.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,9 @@ public class EmployeeService {
 	
 	@Autowired 
 	private DepartmentRepository departmentRepository;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -75,6 +79,28 @@ public class EmployeeService {
 	
 	public int findIdByUsername(String username) {
 		return employeeRepository.findIdByUsername(username);
+	}
+	
+	public List<EmployeeRequest> findContacts(String username){
+		String authority = userService.findAuthorityByUsername(username);
+		List<EmployeeRequest> contacts = new ArrayList<EmployeeRequest>();
+		
+		if(authority.equals("ROLE_EMPLOYEE") || authority.equals("ROLE_PDEMPLOYEE")) {
+			int dep_id = departmentRepository.findIdByUsername(username);
+			
+			String dep_name = departmentRepository.findNameById(dep_id);
+
+			contacts.add(employeeRepository.findSupervisor(dep_name));
+			contacts.add(employeeRepository.findManager());
+			System.out.println(employeeRepository.findManager());
+			contacts.addAll(employeeRepository.findPDEmployees(username));
+			System.out.println(employeeRepository.findPDEmployees(username));
+		}
+		if(authority.equals("ROLE_SUPERVISOR")) {
+			contacts.addAll(employeeRepository.findPDEmployees(username));
+			contacts.add(employeeRepository.findManager());
+		}
+		return contacts;
 	}
 	
 }

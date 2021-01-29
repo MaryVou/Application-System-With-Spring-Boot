@@ -1,6 +1,9 @@
 package gr.hua.repository;
 
 import gr.hua.entity.Employee;
+import gr.hua.entity.EmployeeRequest;
+
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -50,4 +53,16 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	
 	@Query(value="select e.emp_id from employee e where e.username_fk=?1", nativeQuery=true)
 	public int findIdByUsername(String username);
+	
+	@Query(value="select new gr.hua.entity.EmployeeRequest(e.fname,e.lname,e.email,e.phone) from Employee e, Department d where "
+			+ "e.department.name=?1 and e.id=d.supervisor.id")
+	public EmployeeRequest findSupervisor(String dep_name);
+	
+	@Query(value="select new gr.hua.entity.EmployeeRequest(e.fname,e.lname,e.email,e.phone) from Employee e, Authority a where "
+			+ "a.authority='ROLE_MANAGER' and e.user.username=a.user.username")
+	public EmployeeRequest findManager();
+	
+	@Query(value="select new gr.hua.entity.EmployeeRequest(e.fname,e.lname,e.email,e.phone) from Employee e, Authority a where a.authority='ROLE_PDEMPLOYEE' "
+			+ "and a.user.username!=?1 and e.user.username=a.user.username")
+	public List<EmployeeRequest> findPDEmployees(String username);
 }

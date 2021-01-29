@@ -5,25 +5,54 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class EmployeeRequest {
 
 	private String fname;
 	private String lname;
 	private String email;
 	private String phone;
+	
+	@JsonIgnore
 	private String address;
+	
 	@DateTimeFormat(iso = ISO.DATE)
+	@JsonIgnore
 	private Date birth_date;
+	
 	@DateTimeFormat(iso = ISO.DATE)
+	@JsonIgnore
 	private Date hire_date;
+	
 	@DateTimeFormat(iso = ISO.DATE)
+	@JsonIgnore
 	private Date works_since;
+	
+	@JsonIgnore
 	private String username;
+	
+	@JsonIgnore
 	private String password;
+	
+	@JsonIgnore
 	private String dep_name;
+	
+	@JsonIgnore
+	private String authority;
 
 	public EmployeeRequest() {
 		super();
+	}
+
+	public EmployeeRequest(String fname, String lname, String email, String phone) {
+		super();
+		this.fname = fname;
+		this.lname = lname;
+		this.email = email;
+		this.phone = phone;
 	}
 
 	public EmployeeRequest(String fname, String lname, String email, String phone, String address, Date birth_date,
@@ -40,6 +69,23 @@ public class EmployeeRequest {
 		this.username = username;
 		this.password = password;
 		this.dep_name = dep_name;
+	}
+
+	public EmployeeRequest(String fname, String lname, String email, String phone, String address, Date birth_date,
+			Date hire_date, Date works_since, String username, String password, String dep_name, String authority) {
+		super();
+		this.fname = fname;
+		this.lname = lname;
+		this.email = email;
+		this.phone = phone;
+		this.address = address;
+		this.birth_date = birth_date;
+		this.hire_date = hire_date;
+		this.works_since = works_since;
+		this.username = username;
+		this.password = password;
+		this.dep_name = dep_name;
+		this.authority = authority;
 	}
 
 	public String getFname() {
@@ -128,6 +174,14 @@ public class EmployeeRequest {
 
 	public void setDep_name(String dep_name) {
 		this.dep_name = dep_name;
+	}
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 
 	@Override
