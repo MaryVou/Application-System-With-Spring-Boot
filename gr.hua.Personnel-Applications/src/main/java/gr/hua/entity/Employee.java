@@ -53,6 +53,9 @@ public class Employee {
 	@Temporal(TemporalType.DATE)
 	private Date works_since;
 
+	@Column(name = "days")
+	private int days;
+
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "dep_id_fk")
 	private Department department;
@@ -64,7 +67,7 @@ public class Employee {
 	public Employee() {
 
 	}
-
+	
 	public Employee(String fname, String lname, String email, String phone, String address, Date birth_date,
 			Date hire_date, Date works_since) {
 		super();
@@ -148,6 +151,14 @@ public class Employee {
 
 	public void setWorks_since(Date works_since) {
 		this.works_since = works_since;
+	}
+
+	public int getDays() {
+		return days;
+	}
+
+	public void setDays(int days) {
+		this.days = days;
 	}
 
 	public Department getDepartment() {

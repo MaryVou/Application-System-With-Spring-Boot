@@ -32,6 +32,7 @@
 								<th>Phone number</th>
 								<th>Hire date</th>
 								<th>Works since</th>
+								<th>Days Left</th>
 								<th sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
 							</tr>
 						</thead>
@@ -48,6 +49,7 @@
 								<td th:text="${employee.phone}"></td>
 								<td th:text="${employee.hire_date}"></td>
 								<td th:text="${employee.works_since}"></td>
+								<td th:text="${employee.days}"></td>
 								<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/index/employees/delete/{id}(id=${employee.id})}" style="text-decoration: none;font-size:17px;">&#128465;</a></td>
 									
 							</tr>

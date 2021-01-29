@@ -24,6 +24,8 @@ public class ApplicationService {
 	@Autowired
 	private UserService userService;
 	
+	//TODO build days calculator
+	
 	public List<ApplicationResponse> retrieveApplications(String username) {
 		List<ApplicationResponse> applications = null;
 		String authority = userService.findAuthorityByUsername(username);

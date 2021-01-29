@@ -43,6 +43,9 @@ public class EmployeeService {
 	public Employee createEmployee(EmployeeRequest employeeRequest) {
 		Employee emp = new Employee(employeeRequest.getFname(),employeeRequest.getLname(), employeeRequest.getEmail(), employeeRequest.getPhone(), 
 				employeeRequest.getAddress(), employeeRequest.getBirth_date(), employeeRequest.getHire_date(), employeeRequest.getWorks_since());
+		
+		//TODO calculate days before save
+		
 		Employee saved_emp = employeeRepository.save(emp);
 		int emp_id = saved_emp.getId();
 		
@@ -90,15 +93,13 @@ public class EmployeeService {
 			
 			String dep_name = departmentRepository.findNameById(dep_id);
 
-			contacts.add(employeeRepository.findSupervisor(dep_name));
 			contacts.add(employeeRepository.findManager());
-			System.out.println(employeeRepository.findManager());
+			contacts.add(employeeRepository.findSupervisor(dep_name));
 			contacts.addAll(employeeRepository.findPDEmployees(username));
-			System.out.println(employeeRepository.findPDEmployees(username));
 		}
 		if(authority.equals("ROLE_SUPERVISOR")) {
-			contacts.addAll(employeeRepository.findPDEmployees(username));
 			contacts.add(employeeRepository.findManager());
+			contacts.addAll(employeeRepository.findPDEmployees(username));
 		}
 		return contacts;
 	}

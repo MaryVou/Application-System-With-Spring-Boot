@@ -36,9 +36,6 @@ public class Application {
 	@Column(name = "category")
 	private String category;
 
-	@Column(name = "days")
-	private int days;
-
 	@Column(name = "start_date")
 	@Temporal(TemporalType.DATE)
 	private Date start_date;
@@ -77,14 +74,11 @@ public class Application {
 		this.req_papers = req_papers;
 	}
 
-
-
-	public Application(String type, String category, int days, Date start_date, Date last_date, Blob req_papers,
+	public Application(String type, String category, Date start_date, Date last_date, Blob req_papers,
 			Boolean super_sig, Boolean pd_sig, Boolean mgr_sig, Employee employee) {
 		super();
 		this.type = type;
 		this.category = category;
-		this.days = days;
 		this.start_date = start_date;
 		this.last_date = last_date;
 		this.req_papers = req_papers;
@@ -116,14 +110,6 @@ public class Application {
 
 	public void setCategory(String category) {
 		this.category = category;
-	}
-
-	public int getDays() {
-		return days;
-	}
-
-	public void setDays(int days) {
-		this.days = days;
 	}
 
 	public Date getStart_date() {
@@ -184,10 +170,10 @@ public class Application {
 
 	@Override
 	public String toString() {
-		return "Application [id=" + id + ", type=" + type + ", category=" + category + ", days=" + days
+		return "Application [id=" + id + ", type=" + type + ", category=" + category
 				+ ", start_date=" + start_date + ", last_date=" + last_date + ", req_papers=" + req_papers
-				+ ", super_sig=" + super_sig + ", pd_sig=" + pd_sig + ", mgr_sig=" + mgr_sig + ", employee=" + employee.getId()
-				+ "]";
+				+ ", super_sig=" + super_sig + ", pd_sig=" + pd_sig + ", mgr_sig=" + mgr_sig + ", employee="
+				+ employee.getId() + "]";
 	}
 
 }
