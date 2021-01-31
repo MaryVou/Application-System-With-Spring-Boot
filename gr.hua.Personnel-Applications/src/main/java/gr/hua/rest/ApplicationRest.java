@@ -26,7 +26,7 @@ public class ApplicationRest {
 	private ApplicationService applicationService;
 	
 	@PostMapping("/api/applications/new")
-	public ResponseEntity makeApplication(@RequestBody String applicationJson) {
+	public int makeApplication(@RequestBody String applicationJson) {
 		
 		String connected_user = SecurityContextHolder.getContext().getAuthentication().getName();
 		
@@ -40,9 +40,12 @@ public class ApplicationRest {
 			e.printStackTrace();
 		}
 		if(application!=null) {
-			return applicationService.addApplication(application, connected_user);
+			
+			int code = applicationService.addApplication(application, connected_user);
+			System.out.println(code);
+			return code;
 		}
-		return new ResponseEntity(HttpStatus.BAD_REQUEST); 
+		return 400; 
 	}
 	
 	@GetMapping("/api/applications/view")

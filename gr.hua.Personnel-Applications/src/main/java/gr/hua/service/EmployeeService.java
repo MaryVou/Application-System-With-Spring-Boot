@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -107,7 +108,19 @@ public class EmployeeService {
 		return contacts;
 	}
 	
-	public void updateDaysLeft(int days, int emp_id) {
+	public void updateDaysLeft(long days, int emp_id) {
 		employeeRepository.updateDaysLeft(days, emp_id);
+	}
+	
+	public void updatePhone(String phone, String username) {
+		employeeRepository.updatePhone(phone, username);
+	}
+	
+	public void updateAddress(String address, String username) {
+		employeeRepository.updateAddress(address, username);
+	}
+	
+	public void updatePassword(String password, String username) {
+		employeeRepository.updatePhone(passwordEncoder.encode(password), username);
 	}
 }

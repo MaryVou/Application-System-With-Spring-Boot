@@ -16,31 +16,23 @@ public class EmployeeRequest {
 	private String email;
 	private String phone;
 	
-	@JsonIgnore
 	private String address;
 	
 	@DateTimeFormat(iso = ISO.DATE)
-	@JsonIgnore
 	private Date birth_date;
 	
 	@DateTimeFormat(iso = ISO.DATE)
-	@JsonIgnore
 	private Date hire_date;
 	
 	@DateTimeFormat(iso = ISO.DATE)
-	@JsonIgnore
 	private Date works_since;
 	
-	@JsonIgnore
 	private String username;
 	
-	@JsonIgnore
 	private String password;
 	
-	@JsonIgnore
 	private String dep_name;
 	
-	@JsonIgnore
 	private String authority;
 
 	public EmployeeRequest() {

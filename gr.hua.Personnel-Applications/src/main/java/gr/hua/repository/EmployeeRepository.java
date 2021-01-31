@@ -68,5 +68,17 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	
 	@Modifying
 	@Query(value="update employee set days = ?1 where emp_id = ?2", nativeQuery=true)
-	public void updateDaysLeft(int days, int emp_id);
+	public void updateDaysLeft(long days, int emp_id);
+	
+	@Modifying
+	@Query(value="update employee set phone = ?1 where username_fk = ?2", nativeQuery=true)
+	public void updatePhone(String phone, String username);
+	
+	@Modifying
+	@Query(value="update employee set address = ?1 where username_fk = ?2", nativeQuery=true)
+	public void updateAddress(String address, String username);
+	
+	@Modifying
+	@Query(value="update authorities set password = ?1 where username = ?2", nativeQuery=true)
+	public void updatePassword(String password, String username);
 }

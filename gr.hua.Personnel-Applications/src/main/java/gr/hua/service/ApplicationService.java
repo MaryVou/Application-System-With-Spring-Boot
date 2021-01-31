@@ -113,21 +113,25 @@ public class ApplicationService {
 		return applications;
 	}
 	
-	public ResponseEntity addApplication(Application application, String username) {
+	public int addApplication(Application application, String username) {
+		
 		int emp_id = employeeService.findIdByUsername(username);
 		Optional<Employee> emp = employeeService.retrieveEmployeeById(emp_id);
 		
-		int daysAsked = daysCalculator(application.getStart_date(),application.getLast_date());
+		LocalDate start_date_ld = new java.sql.Date(application.getStart_date().getTime()).toLocalDate();
+		LocalDate last_date_ld = new java.sql.Date(application.getLast_date().getTime()).toLocalDate();
+		
+		Duration diff = Duration.between(start_date_ld.atStartOfDay(), last_date_ld.atStartOfDay());
+		long daysAsked = diff.toDays();
 		
 		if(emp.get().getDays() >= daysAsked) {
-			
 			Application app = applicationRepository.save(application);
 			applicationRepository.updateEmployeeId(employeeService.findIdByUsername(username),app.getId());
 			
 			employeeService.updateDaysLeft(emp.get().getDays()-daysAsked, emp_id);
-			return new ResponseEntity(HttpStatus.OK);
+			return 200;
 		}
-		return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		return 400;
 	}
 	
 	public List<ApplicationResponse> findPersonalApplications(String username){
